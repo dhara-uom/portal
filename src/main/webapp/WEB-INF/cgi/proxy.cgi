@@ -21,7 +21,9 @@ allowedHosts = ['www.openlayers.org', 'openlayers.org',
                 'sigma.openplans.org', 'demo.opengeo.org',
                 'www.openstreetmap.org', 'sample.azavea.com',
                 'v2.suite.opengeo.org', 'v-swe.uni-muenster.de:8080', 
-                'vmap0.tiles.osgeo.org', 'www.openrouteservice.org','localhost:8080']
+                'vmap0.tiles.osgeo.org', 'www.openrouteservice.org',
+                'geoprocessing.demo.52north.org:8080',
+		        'localhost:8080', 'localhost','127.0.0.1']
 
 method = os.environ["REQUEST_METHOD"]
 
