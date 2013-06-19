@@ -26,14 +26,30 @@ function WFSClient(initial_services) {
         var select = document.getElementById("services");
         var url = select.options[select.selectedIndex].text;
 
+        var in_options = {
+            'internalProjection': new OpenLayers.Projection("EPSG:4326"),		//TODO: get the map projection
+            'externalProjection': new OpenLayers.Projection("EPSG:4326")
+        };
+        var gmlOptions = {
+            featureType: feature.name ,
+            featureNS: feature.featureNS
+        };
+        var gmlOptionsIn = OpenLayers.Util.extend(
+            OpenLayers.Util.extend({}, gmlOptions),
+            in_options
+        );
+
         var layer = new OpenLayers.Layer.Vector("WFS   "+feature.name, {
             strategies: [new OpenLayers.Strategy.BBOX()],
             protocol: new OpenLayers.Protocol.WFS({
                 url:  url,
                 featureType: feature.name,
-                featureNS: feature.featureNS
+                featureNS: feature.featureNS,
+                formatOptions: {outputFormat: 'GML3'},
+                outputFormat: "GML3",
+                readFormat: new OpenLayers.Format.GML.v3(gmlOptionsIn)
             })
-        , styleMap: new OpenLayers.StyleMap({
+            , styleMap: new OpenLayers.StyleMap({
                 fillColor: this.get_random_color(),
                 strokeWidth: 0.5,
                 fillOpacity: .8
@@ -44,12 +60,9 @@ function WFSClient(initial_services) {
 
     this.get_random_color = function()
     {
-        var r = (Math.round(Math.random()* 127) + 127).toString(16);
-        var g = (Math.round(Math.random()* 127) + 127).toString(16);
-        var b = (Math.round(Math.random()* 127) + 127).toString(16);
-        return '#' + r + g + b;
-
+        return '#'+Math.floor(Math.random()*16777215).toString(16);
     }
+
 
     this.getCapabilities = function(targetSuccessFunction, targetFailureFunction){
         var requestXML = "<?xml version='1.0' encoding='UTF-8'?>";
