@@ -52,8 +52,15 @@
             <li class="">
                 <a href="../index.html"><i class="icon-home"></i> Dashboard</a>
             </li>
-            <li class="active">
+            <li class="dropdown">
                 <a class="" data-toggle="collapse" data-target="#website-dropdown" href="client/client.html"><i class="icon-sitemap"></i> OGC Clients <b class="caret"></b></a>
+                <!--<ul id="website-dropdown" class="collapse">-->
+                <!--<li><a href="listing.html">Pages</a></li>-->
+                <!--<li><a href="listing.html">Menus</a></li>-->
+                <!--</ul>-->
+            </li>
+            <li class="active">
+                <a class="" data-toggle="collapse" data-target="#website-dropdown" href="../visualize/view.html"><i class="icon-sitemap"></i>Data visualizers<b class="caret"></b></a>
                 <!--<ul id="website-dropdown" class="collapse">-->
                 <!--<li><a href="listing.html">Pages</a></li>-->
                 <!--<li><a href="listing.html">Menus</a></li>-->
@@ -252,7 +259,7 @@
         <div class="slate">
 
             <div class="page-header">
-                <h2><a class="pull-right icon-magic" href=""><i class="icon-rss"></i></a>WPS</h2>
+                <h2><i class="pull-right icon-play-circle" href=""></i></a>WPS</h2>
             </div>
             Add WPS server:
             <br/>
@@ -265,6 +272,7 @@
                 <div id="input"></div>
                 <div id="output"></div>
             </div>
+
 
         </div>
 
@@ -330,10 +338,10 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 <script src="../assets/js/bootstrap.js"></script>
 <script type='text/javascript' src='http://openlayers.org/api/OpenLayers.js'></script>
-<script type="text/javascript" src="map.js"></script>
+<script type="text/javascript" src="map_wps.js"></script>
 <!--<script type='text/javascript' src='page_functions.js'></script>-->
-<script type='text/javascript' src='../WFS/wfs_client.js'></script>
-<script type='text/javascript' src='wps_client.js'></script>
+<script type='text/javascript' src='wfs_client.js'></script>
+<!--<script type='text/javascript' src='wps_client.js'></script>-->
 
 
 

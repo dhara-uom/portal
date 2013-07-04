@@ -1,0 +1,33 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+    <display-name>Dhara Portal</display-name>
+    <servlet>
+        <servlet-name>AxisServlet</servlet-name>
+        <display-name>Apache-Axis Servlet</display-name>
+        <servlet-class>org.apache.axis2.transport.http.AxisServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>simple</servlet-name>
+        <servlet-class>org.dhara.portal.web.SimpleServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>XMLRequest</servlet-name>
+        <servlet-class>org.dhara.portal.web.external.XMLRequestHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>simple</servlet-name>
+        <url-pattern>/simple</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>XMLRequest</servlet-name>
+        <url-pattern>/xmlRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AxisServlet</servlet-name>
+        <url-pattern>/services/*</url-pattern>
+    </servlet-mapping>
+</web-app>
