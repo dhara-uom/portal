@@ -31,6 +31,17 @@ import java.util.Map;
 public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     private AiravataConfig airavataConfig;
+    private static AiravataAPI airavataAPI = null;
+
+    public AiravataClientAPIServiceImpl(){
+        if(airavataAPI == null){
+            try {
+                airavataAPI = getAiravataAPI();
+            } catch (PortalException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 
     public List<Workflow> getAllWorkflows() throws PortalException {
         List<Workflow> workflows = null;
@@ -95,20 +106,23 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     }
 
     private AiravataAPI getAiravataAPI() throws PortalException {
-        int port = airavataConfig.getPort();
-        String serverUrl = airavataConfig.getServerUrl();
-        String serverContextName = airavataConfig.getServerContextName();
-        String username = airavataConfig.getUserName();
-        String password = airavataConfig.getPassword();
-        String gatewayName = airavataConfig.getGatewayName();
-        String registryURL = "http://" + serverUrl + ":" + port + "/" + serverContextName + "/api";
-        AiravataAPI airavataAPI = null;
+        if(airavataAPI == null){
+            int port = airavataConfig.getPort();
+            String serverUrl = airavataConfig.getServerUrl();
+            String serverContextName = airavataConfig.getServerContextName();
+            String username = airavataConfig.getUserName();
+            String password = airavataConfig.getPassword();
+            String gatewayName = airavataConfig.getGatewayName();
+            String registryURL = "http://" + serverUrl + ":" + port + "/" + serverContextName + "/api";
+            AiravataAPI api= null;
 
-        try{
-            PasswordCallback passwordCallback = new PasswordCallbackImpl(username, password);
-            airavataAPI = AiravataAPIFactory.getAPI(new URI(registryURL), gatewayName, username, passwordCallback);
-        } catch (Exception e) {
-            throw new PortalException("Error creating airavata api instance",e);
+            try{
+                PasswordCallback passwordCallback = new PasswordCallbackImpl(username, password);
+                api = AiravataAPIFactory.getAPI(new URI(registryURL), gatewayName, username, passwordCallback);
+                airavataAPI = api;
+            } catch (Exception e) {
+                throw new PortalException("Error creating airavata api instance",e);
+            }
         }
 
         return airavataAPI;
