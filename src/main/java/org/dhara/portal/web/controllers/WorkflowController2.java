@@ -14,21 +14,22 @@ import java.util.List;
 /**
  * Created with IntelliJ IDEA.
  * User: nipuni
- * Date: 7/27/13
- * Time: 8:06 PM
+ * Date: 8/10/13
+ * Time: 11:43 AM
  * To change this template use File | Settings | File Templates.
  */
-public class WorkflowController extends AbstractController {
+public class WorkflowController2 extends AbstractController{
 
     @Override
-    protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest,
-                                                 HttpServletResponse httpServletResponse) throws Exception {
+    protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
 
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        AiravataClientAPIServiceImpl airavataClientAPIService = new AiravataClientAPIServiceImpl();
+        AiravataClientAPIServiceImpl airavataAPIService=(AiravataClientAPIServiceImpl) context.getBean("airavataAPIService");
+        List<Workflow> workflowList =  airavataAPIService.getAllWorkflows();
 
-        List<Workflow> workflowList = airavataClientAPIService.getAllWorkflows();
+        ModelAndView model = new ModelAndView("workflows");
+        model.addObject("message", workflowList.size());
 
-        return new ModelAndView("workflow", "list", workflowList);
+        return model;
     }
 }
