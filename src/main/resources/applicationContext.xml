@@ -49,6 +49,12 @@
         </property>
     </bean>
 
+    <bean id="portalDao" class="org.dhara.portal.web.dataAccessLayer.PortalDAOImpl">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory"/>
+        </property>
+    </bean>
+
     <bean id="airavataConfig" class="org.dhara.portal.web.airavataClient.AiravataConfig" scope="singleton">
     </bean>
 
