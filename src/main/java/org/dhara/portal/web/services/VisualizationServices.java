@@ -18,14 +18,12 @@ public class VisualizationServices {
     {
         String KMLFileLocation="/users/mkyong/filename.txt";
         try {
-
             File file = new File(KMLFileLocation);
 
             // if file doesnt exists, then create it
             if (!file.exists()) {
                 file.createNewFile();
             }
-
             FileWriter fw = new FileWriter(file.getAbsoluteFile());
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(KMLData);

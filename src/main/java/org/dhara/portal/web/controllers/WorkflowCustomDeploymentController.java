@@ -1,17 +1,16 @@
 package org.dhara.portal.web.controllers;
 
+import org.apache.airavata.workflow.model.wf.Workflow;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
-import org.dhara.portal.web.codegen.CodeGenService;
+import org.dhara.portal.web.helper.WorkflowHelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.SimpleFormController;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -21,21 +20,27 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class WorkflowCustomDeploymentController extends SimpleFormController {
+    protected final Log log = LogFactory.getLog(getClass());
 
-    protected ModelAndView handleRequestInternal(HttpServletRequest request,
-                                                 HttpServletResponse response) throws Exception {
-        String now = (new Date()).toString();
-        logger.info("Returning hello view with " + now);
-        ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
-        AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
-        CodeGenService codeGenService=(CodeGenService) context.getBean("codeGenService");
-        String s=codeGenService.getGeneratedClass("EchoWorkflow");
-        return new ModelAndView("helloworld", "now", s);
+    protected Object formBackingObject(HttpServletRequest request) throws Exception {
+        String text = "Not used";
+        log.debug("Returning hello world text: " + text);
+        return text;
     }
-
 
     protected Map<String,Object> referenceData(HttpServletRequest request) throws Exception {
         Map<String,Object> modelMap=new HashMap<String, Object>();
-        return null;
+        ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
+        AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
+        List<Workflow> workflowList=airavataClientAPIService.getAllWorkflows();
+        List<WorkflowHelper> workflowHelpers=new ArrayList<WorkflowHelper>();
+        for(Workflow workflow:workflowList)
+        {
+            WorkflowHelper workflowHelper=new WorkflowHelper();
+            workflowHelper.setName(workflow.getName());
+            workflowHelpers.add(workflowHelper);
+        }
+        modelMap.put("workflowList",workflowHelpers);
+        return modelMap;
     }
 }

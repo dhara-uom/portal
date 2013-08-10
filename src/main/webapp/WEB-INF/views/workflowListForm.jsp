@@ -14,7 +14,7 @@
     <c:forEach items="${workflowList}" var="workflow" varStatus="loopStatus">
        <tr>
            <td>
-               <c:out value="${workflowList.name}"/>
+               <c:out value="${workflow.name}"/>
            </td>
        </tr> 
     </c:forEach>
