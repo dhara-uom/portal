@@ -10,11 +10,11 @@ import java.net.URLEncoder;
 
 
 public class WPSConnect52Service {
-
+    private WPS52NorthConfig wps52NorthConfig;
     public void uploadClass(String generatedClass) throws IOException {
         String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
         String inputAdjusted = "input=" + encoded;
-        URL obj = new URL(WPSNorthServiceConstants.WPS_52NORTH_URL);
+        URL obj = new URL(wps52NorthConfig.getServerUrl());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setDoOutput(true);
         con.setDoInput(true);
@@ -52,5 +52,13 @@ public class WPSConnect52Service {
         /*//print result
         System.out.println(response.toString());*/
 
+    }
+
+    public WPS52NorthConfig getWps52NorthConfig() {
+        return wps52NorthConfig;
+    }
+
+    public void setWps52NorthConfig(WPS52NorthConfig wps52NorthConfig) {
+        this.wps52NorthConfig = wps52NorthConfig;
     }
 }

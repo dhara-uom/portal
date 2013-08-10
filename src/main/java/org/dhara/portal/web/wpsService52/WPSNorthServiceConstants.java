@@ -9,6 +9,5 @@ package org.dhara.portal.web.wpsService52;
  */
 public class WPSNorthServiceConstants {
     public final static String USER_AGENT = "Mozilla/5.0";
-    public static String WPS_52NORTH_URL = "http://localhost:8093/52n-wps-webapp-3.2.0-SNAPSHOT/webAdmin/DynamicDeployProcesstest.jsp";
     public static String UTF8 = "UTF8";
 }
