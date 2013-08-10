@@ -63,4 +63,7 @@
             <ref bean="airavataAPIService"/>
         </property>
     </bean>
+
+    <bean id="wps52North" class="org.dhara.portal.web.wpsService52.WPSConnect52Service" scope="prototype">
+    </bean>
 </beans>

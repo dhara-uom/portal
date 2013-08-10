@@ -9,18 +9,12 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class WPSConnect52 {
+public class WPSConnect52Service {
 
-    private final static String USER_AGENT = "Mozilla/5.0";
-    private static String url = "http://localhost:8093/52n-wps-webapp-3.2.0-SNAPSHOT/webAdmin/DynamicDeployProcesstest.jsp";
-
-
-    public static void uploadClass() throws IOException {
-
-        String encoded = URLEncoder.encode(generatedClass.dynamicDeployer, "UTF8");
+    public void uploadClass(String generatedClass) throws IOException {
+        String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
         String inputAdjusted = "input=" + encoded;
-
-        URL obj = new URL(url);
+        URL obj = new URL(WPSNorthServiceConstants.WPS_52NORTH_URL);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setDoOutput(true);
         con.setDoInput(true);
@@ -32,7 +26,7 @@ public class WPSConnect52 {
         con.setUseCaches(false);
 
         //add request header
-        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("User-Agent", WPSNorthServiceConstants.USER_AGENT);
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(inputAdjusted);
@@ -41,10 +35,10 @@ public class WPSConnect52 {
         con.disconnect();
 
         int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + url);
+        /*System.out.println("\nSending 'POST' request to URL : " + WPSNorthServiceConstants.WPS_52NORTH_URL);
         System.out.println("Post parameters : " + encoded);
         System.out.println("Response Code : " + responseCode);
-
+        */
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(con.getInputStream()));
         String inputLine;
@@ -55,14 +49,8 @@ public class WPSConnect52 {
         }
         in.close();
 
-        //print result
-        System.out.println(response.toString());
+        /*//print result
+        System.out.println(response.toString());*/
 
     }
-
-    public static void setURL(String url52) {
-        url = url52;
-    }
-
-
 }

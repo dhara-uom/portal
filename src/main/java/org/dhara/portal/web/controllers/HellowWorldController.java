@@ -41,6 +41,6 @@ public class HellowWorldController extends AbstractController{
         List<Customer> customerList = service.fetchALLCustomers();
 
         request.setAttribute("customerData", customerList);
-        return new ModelAndView("helloworld", "now", customerList.get(0).getId());
+        return new ModelAndView("helloworld", "now", "S");
     }
 }

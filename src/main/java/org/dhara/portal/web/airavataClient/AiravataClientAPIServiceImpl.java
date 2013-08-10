@@ -33,16 +33,6 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     private AiravataConfig airavataConfig;
     private static AiravataAPI airavataAPI = null;
 
-    public AiravataClientAPIServiceImpl(){
-        if(airavataAPI == null){
-            try {
-                airavataAPI = getAiravataAPI();
-            } catch (PortalException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public List<Workflow> getAllWorkflows() throws PortalException {
         List<Workflow> workflows = null;
         AiravataAPI airavataAPI=getAiravataAPI();
