@@ -45,6 +45,12 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return workflows;
     }
 
+    public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException {
+        AiravataAPI airavataAPI=getAiravataAPI();
+        List<ExperimentData> data = airavataAPI.getProvenanceManager().getWorkflowExperimentDataList();
+
+        return data;
+    }
 
     public Workflow getWorkflow(String identifier) throws PortalException {
         AiravataAPI airavataAPI=getAiravataAPI();
