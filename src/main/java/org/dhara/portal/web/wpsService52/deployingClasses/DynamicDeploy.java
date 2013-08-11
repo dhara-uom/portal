@@ -165,29 +165,29 @@ public class DynamicDeploy extends AbstractSelfDescribingAlgorithm {
 
 
 
-        JSONParser jsonParser = new JSONParser();
-        org.json.simple.JSONObject jsonObject= null;
-        try {
-            jsonObject = (org.json.simple.JSONObject) jsonParser.parse(sendGet(inputData1,inputData2));    // send the HTTP request and parse
-        } catch (ParseException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        Set keySet = jsonObject.keySet();
-        Iterator i = keySet.iterator();
-        Map<String, IData> resultMap = new HashMap<String, IData>();
+            JSONParser jsonParser = new JSONParser();
+            org.json.simple.JSONObject jsonObject= null;
+            try {
+                jsonObject = (org.json.simple.JSONObject) jsonParser.parse(sendGet(inputData1,inputData2));    // send the HTTP request and parse
+            } catch (ParseException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Set keySet = jsonObject.keySet();
+            Iterator i = keySet.iterator();
+            Map<String, IData> resultMap = new HashMap<String, IData>();
 
-        while(i.hasNext()){
+            while(i.hasNext()){
 
-            String key= (String)i.next();
-            String value= (String)jsonObject.get(key);
-            IData wrappedValue = new LiteralStringBinding(value);
-            resultMap.put(key,wrappedValue);
-        }
+                String key= (String)i.next();
+                String value= (String)jsonObject.get(key);
+                IData wrappedValue = new LiteralStringBinding(value);
+                resultMap.put(key,wrappedValue);
+            }
 
 
-        return resultMap;
+            return resultMap;
     }
 
     private String sendGet(Integer inputData1, Integer inputData2) throws IOException {

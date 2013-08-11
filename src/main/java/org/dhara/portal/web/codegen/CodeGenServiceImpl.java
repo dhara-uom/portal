@@ -149,6 +149,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             data.put("outputIdentifiers", outputIdentifiers);
             data.put("inputMappings",inputMappings);
             data.put("outputMappings",outputMappings);
+            data.put("executionServlet",CodegenUtils.EXECUTION_SERVLET);
 
             Map<String,String> inputBindings =inputBindingsList;
             Set<Map.Entry<String, String>> entriesIn = inputBindings.entrySet();

@@ -29,6 +29,13 @@ public class CodegenUtils {
     public static final String dataImports="import org.n52.wps.io.data.*;";
     public static final String utilImports="import java.util.*;";
     public static final String loggerImports="import org.apache.log4j.Logger;";
+    public static final String ioImports="import java.io.*;";
+    public static final String netImports="import java.net.*;";
+    public static final String jsonImports="import org.json.simple.parser.*;";
+    public static final String httpImports="import javax.net.ssl.HttpsURLConnection;";
+    public static final String jsonParserImports="import org.json.simple.parser.JSONParser;";
+    public static final String jsonObjectImports="import org.json.simple.JSONObject;";
+    public static final String jsonExceptionImports="import org.json.simple.parser.ParseException;";
     public static final String defaultPackage ="package org.dhara.wps;";
     public static final String defaultExtendingClass="AbstractSelfDescribingAlgorithm";
     public static final String COMPLEX_ASCII_GRASS_DATA_BINDING="AsciiGrassDataBinding";
@@ -61,6 +68,7 @@ public class CodegenUtils {
     public static final String OVERLAPS_ALGORITHM="OverlapsAlgorithm";
     public static final String TOUCHES_ALGORITHM="TouchesAlgorithm";
     public static final String WITHIN_ALGORITHM="WithinAlgorithm";
+    public static final String EXECUTION_SERVLET="http://localhost:8093/J2EETEST/MyServlet";
 
 
     static {
@@ -76,6 +84,13 @@ public class CodegenUtils {
         getImports().add(dataImports);
         getImports().add(utilImports);
         getImports().add(loggerImports);
+        getImports().add(ioImports);
+        getImports().add(netImports);
+        getImports().add(httpImports);
+        getImports().add(jsonImports);
+        getImports().add(jsonObjectImports);
+        getImports().add(jsonParserImports);
+        getImports().add(jsonExceptionImports);
 
         getLiterals().put("integer", "LiteralIntBinding");
         getLiterals().put("String", "LiteralStringBinding");
