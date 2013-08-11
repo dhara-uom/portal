@@ -125,7 +125,6 @@ public List<String> getInputIdentifiers() {
                     String ${inputIdentifier}Data,
                 </#list>String end) throws IOException {
                     url = url+"?end=" + end + <#list inputIdentifiers as inputIdentifier>
-                ${inputIdentifier}Data
                     +"&${inputIdentifier}="+${inputIdentifier}Data
                 </#list>
                     +"&workflowId=${processName}";

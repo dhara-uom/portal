@@ -43,7 +43,7 @@ public class WorkflowDeploymentController extends AbstractController {
             workflowHelpers.add(workflowHelper);
         }
         CodeGenService codeGenService= (CodeGenService) context.getBean("codeGenService");
-        String s=codeGenService.getGeneratedClass("EchoWorkflow");
+       // String s=codeGenService.getGeneratedClass("EchoWorkflow");
         ModelAndView model = new ModelAndView("workflowListForm");
         model.addObject("workflowList", workflowHelpers);
         return model;
