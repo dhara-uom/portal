@@ -1,5 +1,7 @@
 package org.dhara.portal.web.NorthToAiravataConnect;
 
+import org.apache.airavata.workflow.model.wf.Workflow;
+import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
 import org.dhara.portal.web.airavataClient.AiravataClientAPIServiceImpl;
 import org.json.simple.JSONObject;
@@ -13,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class MainServlet extends javax.servlet.http.HttpServlet {
+public class WorkflowExecutionServlet extends javax.servlet.http.HttpServlet {
 
     private static Map<String, Object> outputs;
 
@@ -23,27 +25,21 @@ public class MainServlet extends javax.servlet.http.HttpServlet {
     }
 
     protected void doGet(javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response) throws javax.servlet.ServletException, IOException {
-
         PrintWriter pw = response.getWriter();
-
-        String input = request.getParameter("input");       //set the inputs to input1 and input2..
-
+        String workflowId=request.getParameter("workflowId");
         try {
-
-
             ApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
             AiravataClientAPIService airavataClientAPIService = (AiravataClientAPIService) context.getBean("airavataAPIService");
             Map<String, Object> inputs = new HashMap<String, Object>();
-            inputs.put("input", Integer.parseInt(input));
-            String experimentId = airavataClientAPIService.executeWorkflow(inputs, "52NorthTest");      //     _52NorthExecuteWorkFlowTest
+            Workflow workflow=airavataClientAPIService.getWorkflow(workflowId);
+            for(WorkflowInput workflowInput:workflow.getWorkflowInputs()) {
+                inputs.put(workflowInput.getName(),request.getParameter(workflowInput.getName()));
+            }
+            String experimentId = airavataClientAPIService.executeWorkflow(inputs, workflowId);      //     _52NorthExecuteWorkFlowTest
             outputs = airavataClientAPIService.getWorkflowOutputs(experimentId);
-
             JSONObject jsonObject = new JSONObject(outputs);
-
             PrintWriter printWriter = response.getWriter();
-
             printWriter.write(jsonObject.toJSONString());
-
         } catch (URISyntaxException e) {
             e.printStackTrace();
         } catch (Exception e) {
