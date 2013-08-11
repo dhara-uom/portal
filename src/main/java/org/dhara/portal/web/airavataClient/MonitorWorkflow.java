@@ -38,24 +38,9 @@ public class MonitorWorkflow {
 
     public void monitor(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
         MonitorListener monitorListener = new MonitorListener();
-        ExecutionManager executionManager=airavataAPI.getExecutionManager();
-        Monitor experimentMonitor = executionManager.getExperimentMonitor(experimentId,
+        Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
                 monitorListener);
         log.info("Started the Workflow monitor");
         experimentMonitor.startMonitoring();
-        MonitorConfiguration monitorConfiguration = experimentMonitor.getConfiguration();
-        URI brokerURL =  monitorConfiguration.getBrokerURL();
-        URI messageBoxURL = monitorConfiguration.getMessageBoxURL();
-        String topic = monitorConfiguration.getTopic();
-        List<String> nodes = monitorConfiguration.getInteractiveNodeIDs();
-
-        log.info("BrokerURL : "+brokerURL);
-        log.info("MessageBoxURL :"+messageBoxURL);
-        log.info("Topic: "+topic);
-        for(String node:nodes){
-            log.info("Node:"+node);
-        }
-
-        experimentMonitor.stopMonitoring();
     }
 }

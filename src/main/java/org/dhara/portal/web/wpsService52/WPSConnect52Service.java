@@ -11,7 +11,7 @@ import java.net.URLEncoder;
 
 public class WPSConnect52Service {
     private WPS52NorthConfig wps52NorthConfig;
-    public void uploadClass(String generatedClass) throws IOException {
+    public void uploadClass(String generatedClass,String classnName) throws IOException {
         String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
         String inputAdjusted = "input=" + encoded;
         URL obj = new URL(wps52NorthConfig.getServerUrl());

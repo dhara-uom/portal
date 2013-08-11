@@ -20,7 +20,6 @@ import java.util.Map;
 public interface AiravataClientAPIService {
     public List<Workflow> getAllWorkflows() throws PortalException;
     public Workflow getWorkflow(String identifier) throws PortalException;
-    public String executeWorkflow(Map<String,Object> inputs,String workflowId) throws Exception;
-    public Map<String,Object> getWorkflowOutputs(String experimentId) throws AiravataAPIInvocationException, URISyntaxException, ExperimentLazyLoadedException, PortalException;
+    public Map<String,Object> executeWorkflow(Map<String,Object> inputs,String workflowId) throws Exception;
     public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException;
 }

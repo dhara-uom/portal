@@ -68,8 +68,7 @@ public class CodegenUtils {
     public static final String OVERLAPS_ALGORITHM="OverlapsAlgorithm";
     public static final String TOUCHES_ALGORITHM="TouchesAlgorithm";
     public static final String WITHIN_ALGORITHM="WithinAlgorithm";
-    public static final String EXECUTION_SERVLET="http://localhost:8093/J2EETEST/MyServlet";
-
+    public static final String EXECUTION_SERVLET="http://localhost:8090/portal/connect/ExecutionServlet";
 
     static {
         getMethods().add(getInputDataTypeMethod);

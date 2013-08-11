@@ -31,7 +31,6 @@ import java.util.Map;
 public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     private AiravataConfig airavataConfig;
-    private static AiravataAPI airavataAPI = null;
 
     public List<Workflow> getAllWorkflows() throws PortalException {
         List<Workflow> workflows = null;
@@ -64,7 +63,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return workflow;
     }
 
-    public String executeWorkflow(Map<String, Object> inputs, String workflowId) throws Exception {
+    public Map<String,Object> executeWorkflow(Map<String, Object> inputs, String workflowId) throws Exception {
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
         List<WorkflowInput> workflowInputs = workflow.getWorkflowInputs();
@@ -78,11 +77,8 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
                 workflowInput.setValue((Object)value);
             }
         }
-        return airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
-    }
 
-    public Map<String, Object> getWorkflowOutputs(String experimentId) throws AiravataAPIInvocationException, URISyntaxException, ExperimentLazyLoadedException, PortalException {
-        AiravataAPI airavataAPI=getAiravataAPI();
+        String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
         Map<String,Object> outputs=new HashMap<String, Object>();
         MonitorWorkflow monitorWorkflow=new MonitorWorkflow();
         monitorWorkflow.monitor(experimentId,airavataAPI);
@@ -102,7 +98,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     }
 
     private AiravataAPI getAiravataAPI() throws PortalException {
-        if(airavataAPI == null){
+            AiravataAPI airavataAPI;
             int port = airavataConfig.getPort();
             String serverUrl = airavataConfig.getServerUrl();
             String serverContextName = airavataConfig.getServerContextName();
@@ -111,7 +107,6 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
             String gatewayName = airavataConfig.getGatewayName();
             String registryURL = "http://" + serverUrl + ":" + port + "/" + serverContextName + "/api";
             AiravataAPI api= null;
-
             try{
                 PasswordCallback passwordCallback = new PasswordCallbackImpl(username, password);
                 api = AiravataAPIFactory.getAPI(new URI(registryURL), gatewayName, username, passwordCallback);
@@ -119,9 +114,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
             } catch (Exception e) {
                 throw new PortalException("Error creating airavata api instance",e);
             }
-        }
-
-        return airavataAPI;
+            return airavataAPI;
     }
 
     public void setAiravataConfig(AiravataConfig airavataConfig) {
