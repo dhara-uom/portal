@@ -66,10 +66,10 @@ public List<String> getInputIdentifiers() {
 
                 @SuppressWarnings({ "unchecked" })
                 @Override
-                public Map<String, IData> run(Map<String, List<IData>> inputData) {
+                public Map<String, IData> run(Map<String, List<IData>> inputDataList) {
 
                 <#list inputIdentifiers as inputIdentifier>
-                    List<IData> ${inputIdentifier}List = inputData.get("${inputIdentifier}");
+                    List<IData> ${inputIdentifier}List = inputDataList.get("${inputIdentifier}");
                 </#list>
 
                 <#list inputIdentifiers as inputIdentifier>
@@ -120,11 +120,10 @@ public List<String> getInputIdentifiers() {
                     }
                     return resultMap;
                     }
-
                     private String sendGet(<#list inputIdentifiers as inputIdentifier>
                     String ${inputIdentifier}Data,
                 </#list>String end) throws IOException {
-                    url = url+"?end=" + end + <#list inputIdentifiers as inputIdentifier>
+                    url = url+"?end="+ end<#list inputIdentifiers as inputIdentifier>
                     +"&${inputIdentifier}="+${inputIdentifier}Data
                 </#list>
                     +"&workflowId=${processName}";
