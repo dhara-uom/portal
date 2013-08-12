@@ -10,5 +10,5 @@ import java.io.IOException;
  * To change this template use File | Settings | File Templates.
  */
 public interface WPS52NorthService {
-    public void uploadClass(String generatedClass,String classnName) throws IOException;
+    public void uploadClass(String generatedClass,String workFlowId) throws IOException;
 }

@@ -40,7 +40,7 @@ public class WPS52NorthConfig {
     private void setDefaultConfig() throws PortalException {
         this.setPassword("admin");
         this.setUserName("admin");
-        this.setServerUrl("http://localhost:8093/52n-wps-webapp-3.2.0-SNAPSHOT/webAdmin/DynamicDeployProcesstest.jsp");
+        this.setServerUrl("http://localhost:8093/52n-wps-webapp-3.3.0-SNAPSHOT/webAdmin/DynamicDeployProcesstest.jsp");
     }
 
     private void set52NorthConfiguration() throws PortalException {
