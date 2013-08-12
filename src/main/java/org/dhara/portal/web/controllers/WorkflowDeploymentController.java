@@ -35,7 +35,7 @@ public class WorkflowDeploymentController extends AbstractController {
         WPS52NorthService wpsConnect52Servie= (WPS52NorthService) context.getBean("wps52NorthService");
         String generatedCode=codeGenService.getGeneratedClass(workflowId);
         wpsConnect52Servie.uploadClass(generatedCode,workflowId);
-        ModelAndView model = new ModelAndView("workflows");
+        ModelAndView model = new ModelAndView("redirect:/workflowList.htm");
         return model;
     }
 

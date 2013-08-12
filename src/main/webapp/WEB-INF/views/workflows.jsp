@@ -196,9 +196,8 @@
                                             <FONT COLOR=#4B3232 SIZE="2"><c:out value=""></c:out></FONT>
                                         </td>
                                         <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><a href="">Deafult </a> <a href=""> Custom</a>
+                                            <FONT COLOR=#4B3232 SIZE="2"><a href="deployWorkflow.htm?${workflow.name}">Deafult</a> <a href=""> Custom</a></FONT>
                                         </td>
-
                                     </tr>
                                 </c:forEach>
                             </table>
