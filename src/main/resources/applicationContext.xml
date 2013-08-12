@@ -73,7 +73,7 @@
         </property>
     </bean>
 
-    <bean id="wps52North" class="org.dhara.portal.web.wpsService52.WPSConnect52Service" scope="prototype">
+    <bean id="wps52NorthService" class="org.dhara.portal.web.wpsService52.WPSConnect52ServiceImpl" scope="prototype">
         <property name="wps52NorthConfig">
             <ref bean="wps52NorthConfig"/>
         </property>

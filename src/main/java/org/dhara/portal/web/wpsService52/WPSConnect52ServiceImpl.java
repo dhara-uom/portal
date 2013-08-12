@@ -9,7 +9,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class WPSConnect52Service {
+public class WPSConnect52ServiceImpl {
     private WPS52NorthConfig wps52NorthConfig;
     public void uploadClass(String generatedClass,String classnName) throws IOException {
         String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
