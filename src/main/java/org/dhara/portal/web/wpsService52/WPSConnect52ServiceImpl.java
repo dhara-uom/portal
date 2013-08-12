@@ -9,9 +9,9 @@ import java.net.URL;
 import java.net.URLEncoder;
 
 
-public class WPSConnect52ServiceImpl {
+public class WPSConnect52ServiceImpl implements WPS52NorthService{
     private WPS52NorthConfig wps52NorthConfig;
-    public void uploadClass(String generatedClass,String classnName) throws IOException {
+    public void uploadClass(String generatedClass,String workFlowId) throws IOException {
         String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
         String inputAdjusted = "input=" + encoded;
         URL obj = new URL(wps52NorthConfig.getServerUrl());
@@ -27,6 +27,9 @@ public class WPSConnect52ServiceImpl {
 
         //add request header
         con.setRequestProperty("User-Agent", WPSNorthServiceConstants.USER_AGENT);
+
+
+
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(inputAdjusted);
