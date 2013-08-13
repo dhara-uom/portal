@@ -2,6 +2,7 @@ package org.dhara.portal.web.wpsService52;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
+import org.dhara.portal.web.codegen.CodegenUtils;
 import org.dhara.portal.web.exception.PortalException;
 
 import javax.xml.namespace.QName;
@@ -23,6 +24,7 @@ public class WPS52NorthConfig {
     private  String serverUrl;
     private  String userName;
     private  String password;
+    private  String defaultPackage;
 
     public WPS52NorthConfig() throws PortalException {
         if(isWPS52NorthConfigurationExists()) {
@@ -41,6 +43,7 @@ public class WPS52NorthConfig {
         this.setPassword("admin");
         this.setUserName("admin");
         this.setServerUrl("http://localhost:8093/52n-wps-webapp-3.3.0-SNAPSHOT/webAdmin/DynamicDeployProcesstest.jsp");
+        this.setDefaultPackage(CodegenUtils.defaultPackage);
     }
 
     private void set52NorthConfiguration() throws PortalException {
@@ -89,5 +92,13 @@ public class WPS52NorthConfig {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDefaultPackage() {
+        return defaultPackage;
+    }
+
+    public void setDefaultPackage(String defaultPackage) {
+        this.defaultPackage = defaultPackage;
     }
 }

@@ -12,8 +12,16 @@ import java.net.URLEncoder;
 public class WPSConnect52ServiceImpl implements WPS52NorthService{
     private WPS52NorthConfig wps52NorthConfig;
     public void uploadClass(String generatedClass,String workFlowId) throws IOException {
-        String encoded = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.USER_AGENT);
-        String inputAdjusted = "input=" + encoded;
+
+        String defaultPackage = wps52NorthConfig.getDefaultPackage();
+        String classNameWithPackages = defaultPackage.substring(8,defaultPackage.length()-1)+"."+workFlowId;
+
+
+        String encodedClass = URLEncoder.encode(generatedClass, WPSNorthServiceConstants.UTF8);
+        String encodedClassName=URLEncoder.encode(classNameWithPackages, WPSNorthServiceConstants.UTF8);
+
+        String inputAdjusted = "class=" + encodedClass+"&"+"classname="+encodedClassName;
+
         URL obj = new URL(wps52NorthConfig.getServerUrl());
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
         con.setDoOutput(true);
@@ -27,9 +35,6 @@ public class WPSConnect52ServiceImpl implements WPS52NorthService{
 
         //add request header
         con.setRequestProperty("User-Agent", WPSNorthServiceConstants.USER_AGENT);
-
-
-
 
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(inputAdjusted);
