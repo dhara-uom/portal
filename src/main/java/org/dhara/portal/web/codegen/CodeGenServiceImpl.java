@@ -185,6 +185,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             br = new BufferedReader(new FileReader(className+".java"));
             while ((currentLine = br.readLine()) != null) {
                 builder.append(currentLine);
+                builder.append(System.getProperty("line.separator"));
             }
                 return builder.toString();
 
