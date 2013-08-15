@@ -3,10 +3,10 @@ package org.dhara.portal.web.airavataClient;
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
 import org.apache.airavata.registry.api.exception.worker.ExperimentLazyLoadedException;
 import org.apache.airavata.registry.api.workflow.ExperimentData;
+import org.apache.airavata.registry.api.workflow.NodeExecutionData;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.dhara.portal.web.exception.PortalException;
 
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
@@ -22,4 +22,5 @@ public interface AiravataClientAPIService {
     public Workflow getWorkflow(String identifier) throws PortalException;
     public Map<String,Object> executeWorkflow(Map<String,Object> inputs,String workflowId) throws Exception;
     public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException;
+    public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException, ExperimentLazyLoadedException;
 }

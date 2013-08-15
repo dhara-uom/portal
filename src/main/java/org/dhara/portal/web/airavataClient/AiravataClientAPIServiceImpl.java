@@ -3,20 +3,18 @@ package org.dhara.portal.web.airavataClient;
 import org.apache.airavata.client.AiravataAPIFactory;
 import org.apache.airavata.client.api.AiravataAPI;
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
+import org.apache.airavata.client.api.ProvenanceManager;
 import org.apache.airavata.client.api.WorkflowManager;
 import org.apache.airavata.registry.api.PasswordCallback;
 import org.apache.airavata.registry.api.exception.worker.ExperimentLazyLoadedException;
 import org.apache.airavata.registry.api.impl.WorkflowExecutionDataImpl;
-import org.apache.airavata.registry.api.workflow.ExperimentData;
-import org.apache.airavata.registry.api.workflow.NodeExecutionData;
-import org.apache.airavata.registry.api.workflow.OutputData;
+import org.apache.airavata.registry.api.workflow.*;
 import org.apache.airavata.rest.client.PasswordCallbackImpl;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.exception.PortalException;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -46,9 +44,8 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException {
         AiravataAPI airavataAPI=getAiravataAPI();
-        List<ExperimentData> data = airavataAPI.getProvenanceManager().getWorkflowExperimentDataList();
-
-        return data;
+        List<ExperimentData> experimentByUser = airavataAPI.getProvenanceManager().getExperimentDataList();
+        return experimentByUser;
     }
 
     public Workflow getWorkflow(String identifier) throws PortalException {
@@ -119,5 +116,30 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     public void setAiravataConfig(AiravataConfig airavataConfig) {
         this.airavataConfig = airavataConfig;
+    }
+
+    public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException,
+            ExperimentLazyLoadedException {
+        AiravataAPI airavataAPI = getAiravataAPI();
+        ProvenanceManager provenanceManager = airavataAPI.getProvenanceManager();
+        String experimentId = "";
+        String workflowInstanceId = "";
+
+        List<ExperimentData>  experimentDataList = provenanceManager.getWorkflowExperimentDataList();
+        for (ExperimentData experimentData: experimentDataList){
+
+            List<WorkflowExecutionDataImpl> workflowInstanceData = experimentData.getWorkflowExecutionDataList();
+            for (WorkflowExecutionDataImpl workflowInstance : workflowInstanceData){
+                experimentId = workflowInstance.getExperimentId();
+                workflowInstanceId = workflowInstance.getWorkflowInstanceId();
+            }
+        }
+
+        //This only will return the nodeData of final experimentId, instanceId pair of the above for-loop
+        List<NodeExecutionData> nodeData =
+                provenanceManager.getWorkflowInstanceData(experimentId,workflowInstanceId).getNodeDataList();
+
+
+        return nodeData;
     }
 }
