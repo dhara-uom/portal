@@ -1,3 +1,5 @@
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
+<%--<%@ taglib prefix="display" uri="http://java.sun.com/jsp/jstl/core"  %>--%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
 <%--
@@ -39,6 +41,16 @@
         }
 
     </style>
+    <%--<script type="text/javascript">--%>
+        <%--function limitRows(){--%>
+            <%--var maxRows = 10;--%>
+            <%--var table = Document.getElementById("experimentListTable");--%>
+            <%--var rowsInTable = table.rows.length;--%>
+            <%--if(rowsInTable>maxRows){--%>
+
+            <%--}--%>
+        <%--}--%>
+    <%--</script>--%>
 </head>
 <body>
 
@@ -65,12 +77,19 @@
                         <!--<li><a href="listing.html">Menus</a></li>-->
                         <!--</ul>-->
                     </li>
-                    <li class="">
-                        <a class="" data-toggle="collapse" data-target="#website-dropdown" href="airavataClient/client.html"><i class="icon-sitemap"></i> Airavata Client <b class="caret"></b></a>
+                    <li class="active">
+                        <a class="" data-toggle="collapse" data-target="#website-dropdown" href="visualize/view.html"><i class="icon-sitemap"></i>Data visualizers<b class="caret"></b></a>
                         <!--<ul id="website-dropdown" class="collapse">-->
                         <!--<li><a href="listing.html">Pages</a></li>-->
                         <!--<li><a href="listing.html">Menus</a></li>-->
                         <!--</ul>-->
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="collapse" data-target="#website-dropdown" href="#"><i class="icon-sitemap"></i> Airavata Client <b class="caret"></b></a>
+                        <ul id="website-dropdown" class="collapse">
+                            <li><a href="workflowList.htm">Workflows</a></li>
+                            <li><a href="experimentList.htm">Experiments</a></li>
+                        </ul>
                     </li>
                     <!--<li class="dropdown">
                         <a class="dropdown-toggle" data-toggle="collapse" data-target="#store-dropdown" href="#"><i class="icon-shopping-cart"></i> Store <b class="caret"></b></a>
@@ -174,30 +193,51 @@
 
                         <div class="slate clearfix">
 
-                            <table  align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">
-                                <thead>
-                                <tr class="border_bottom">
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Experiment Name</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Last updated</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Author</FONT></th>
-                                </tr>
-                                </thead>
+                            <%--<table id="experimentListTable" align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">--%>
+                                <%--<thead>--%>
+                                <%--<tr class="border_bottom">--%>
+                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Experiment Name</FONT></th>--%>
+                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Last updated</FONT></th>--%>
+                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Author</FONT></th>--%>
+                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">State</FONT></th>--%>
+                                <%--</tr>--%>
+                                <%--</thead>--%>
 
-                                <c:forEach items="${message}" var="experiment" varStatus="loop">
-                                    <tr class="border_bottom">
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.name}"></c:out></FONT>
-                                        </td>
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.updatedTime}"></c:out></FONT>
-                                        </td>
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.author}"></c:out></FONT>
-                                        </td>
+                                <%--<c:forEach items="${message}" var="experiment" varStatus="loop">--%>
+                                    <%--<tr class="border_bottom">--%>
+                                        <%--<td>--%>
+                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.name}"></c:out></FONT>--%>
+                                        <%--</td>--%>
+                                        <%--<td>--%>
+                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.updatedTime}"></c:out></FONT>--%>
+                                        <%--</td>--%>
+                                        <%--<td>--%>
+                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.author}"></c:out></FONT>--%>
+                                        <%--</td>--%>
+                                        <%--<td>--%>
+                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.state}"></c:out></FONT>--%>
+                                        <%--</td>--%>
+                                    <%--</tr>--%>
+                                <%--</c:forEach>--%>
+                            <%--</table>--%>
 
-                                    </tr>
-                                </c:forEach>
-                            </table>
+
+                            <display:table uid="user" name="message" defaultsort="1"
+                                           defaultorder="ascending" pagesize="10">
+                                <display:column property="name" sortable="true" title="Experiment Name"
+                                                maxLength="100" />
+                                <display:column property="updatedTime" sortable="true" title="Last updated"
+                                                maxLength="100" />
+                                <display:column property="author" sortable="true"
+                                                title="Author" maxLength="100" />
+                                <display:column property="state" sortable="true" title="State"
+                                                maxLength="100" />
+                                <display:setProperty name="basic.empty.showtable" value="true" />
+                                <display:setProperty name="paging.banner.group_size" value="10" />
+                                <display:setProperty name="paging.banner.item_name" value="experiment" />
+                                <display:setProperty name="paging.banner.item_names" value="experiments" />
+
+                            </display:table>
 
 
                         </div>
