@@ -33,7 +33,8 @@ public class WorkflowMontorController extends AbstractController{
             WorkflowDataHelper helper = new WorkflowDataHelper();
             NodeExecutionData data = nodeExecutionData.get(index);
 
-            helper.setDate(data.getStatusUpdateTime());
+            helper.setExperimentId(data.getWorkflowInstanceNode().getWorkflowInstance().getExperimentId());
+            helper.setType(data.getType().toString());
             helper.setInput(data.getInput());
             helper.setOutput(data.getOutput());
             workflowDataHelperList.add(helper);

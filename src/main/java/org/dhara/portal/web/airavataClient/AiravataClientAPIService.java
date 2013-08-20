@@ -22,5 +22,6 @@ public interface AiravataClientAPIService {
     public Workflow getWorkflow(String identifier) throws PortalException;
     public Map<String,Object> executeWorkflow(Map<String,Object> inputs,String workflowId) throws Exception;
     public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException;
+    public List<NodeExecutionData> getNodeData(ExperimentData experimentData) throws ExperimentLazyLoadedException, PortalException, AiravataAPIInvocationException;
     public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException, ExperimentLazyLoadedException;
 }

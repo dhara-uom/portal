@@ -125,17 +125,33 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         String experimentId = "";
         String workflowInstanceId = "";
 
-        List<ExperimentData>  experimentDataList = provenanceManager.getWorkflowExperimentDataList();
+        List<ExperimentData>  experimentDataList = getExperimentData();
         for (ExperimentData experimentData: experimentDataList){
-
             List<WorkflowExecutionDataImpl> workflowInstanceData = experimentData.getWorkflowExecutionDataList();
-            for (WorkflowExecutionDataImpl workflowInstance : workflowInstanceData){
-                experimentId = workflowInstance.getExperimentId();
-                workflowInstanceId = workflowInstance.getWorkflowInstanceId();
-            }
+//            for (WorkflowExecutionDataImpl workflowInstance : workflowInstanceData){
+//                experimentId = workflowInstance.getExperimentId();
+//                workflowInstanceId = workflowInstance.getWorkflowInstanceId();
+//            }
         }
 
-        //This only will return the nodeData of final experimentId, instanceId pair of the above for-loop
+        ExperimentData ed = experimentDataList.get(0);
+        experimentId = ed.getExperimentId();
+        workflowInstanceId = ed.getWorkflowExecutionDataList().get(0).getWorkflowInstanceId();
+
+        //This only will return the nodeData of first experimentId, instanceId pair of the above for-loop
+        List<NodeExecutionData> nodeData =
+                provenanceManager.getWorkflowInstanceData(experimentId,workflowInstanceId).getNodeDataList();
+
+
+        return nodeData;
+    }
+
+    public List<NodeExecutionData> getNodeData(ExperimentData experimentData)
+            throws ExperimentLazyLoadedException, PortalException, AiravataAPIInvocationException {
+        String experimentId = experimentData.getExperimentId();
+        String workflowInstanceId = experimentData.getWorkflowExecutionDataList().get(0).getWorkflowInstanceId();
+        ProvenanceManager provenanceManager = getAiravataAPI().getProvenanceManager();
+
         List<NodeExecutionData> nodeData =
                 provenanceManager.getWorkflowInstanceData(experimentId,workflowInstanceId).getNodeDataList();
 

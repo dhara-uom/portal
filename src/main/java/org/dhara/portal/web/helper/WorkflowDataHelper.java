@@ -14,6 +14,8 @@ public class WorkflowDataHelper {
     private Date date;
     private String input;
     private String output;
+    private String type;
+    private String experimentId;
 
     public Date getDate() {
         return date;
@@ -37,5 +39,21 @@ public class WorkflowDataHelper {
 
     public void setOutput(String output) {
         this.output = output;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getExperimentId() {
+        return experimentId;
+    }
+
+    public void setExperimentId(String experimentId) {
+        this.experimentId = experimentId;
     }
 }
