@@ -14,6 +14,7 @@ public class ExperimentHelper {
     private String name;
     private String author;
     private Date updatedTime;
+    private String state;
 
 
     public String getName() {
@@ -38,5 +39,13 @@ public class ExperimentHelper {
 
     public void setUpdatedTime(Date updatedTime) {
         this.updatedTime = updatedTime;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }
