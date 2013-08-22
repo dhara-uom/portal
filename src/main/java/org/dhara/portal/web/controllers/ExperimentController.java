@@ -11,6 +11,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -36,11 +37,27 @@ public class ExperimentController extends AbstractController {
              helper.setName(data.getExperimentName());
              helper.setUpdatedTime(data.getStatusUpdateTime());
              helper.setAuthor(data.getUser());
+             helper.setState(data.getState().toString());
              experimentHelpers.add(helper);
+
         }
+        experimentHelpers =  reverseList(experimentHelpers);
 
         ModelAndView model = new ModelAndView("experiments");
         model.addObject("message", experimentHelpers);
         return model;
+    }
+
+    public ArrayList<ExperimentHelper> reverseList(List<ExperimentHelper> list){
+
+        if(list==null || list.isEmpty())
+        {
+            return null;
+        }
+
+        ArrayList<ExperimentHelper> riversedlist = new ArrayList<ExperimentHelper>(list);
+
+        Collections.reverse(riversedlist);
+        return riversedlist;
     }
 }

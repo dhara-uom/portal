@@ -166,7 +166,7 @@
                         <div class="slate">
 
                             <div class="page-header">
-                                <h2><i class="icon-globe pull-right"></i>Workflow List</h2>
+                                <h2><i class="icon-globe pull-right"></i>Workflow Data List</h2>
                             </div>
 
                         </div>
@@ -184,26 +184,26 @@
                             <table  align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">
                                 <thead>
                                 <tr class="border_bottom">
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Workflow Name</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Created by</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Date Created</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Deployment options</FONT></th>
+                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Experiment ID</FONT></th>
+                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Node Type</FONT></th>
+                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Input</FONT></th>
+                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Output</FONT></th>
                                 </tr>
                                 </thead>
 
-                                <c:forEach items="${message}" var="workflow" varStatus="loop">
+                                <c:forEach items="${message}" var="workflowData" varStatus="loop">
                                     <tr class="border_bottom">
                                         <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflow.name}"></c:out></FONT>
+                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflowData.experimentId}"></c:out></FONT>
                                         </td>
                                         <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value=""></c:out></FONT>
+                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflowData.type}"></c:out></FONT>
                                         </td>
                                         <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value=""></c:out></FONT>
+                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflowData.input}"></c:out></FONT>
                                         </td>
                                         <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><a href="deployWorkflow.htm?workflowId=${workflow.name}">Deafult</a> <a href=""> Custom</a></FONT>
+                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflowData.output}"></c:out></FONT>
                                         </td>
                                     </tr>
                                 </c:forEach>
