@@ -39,7 +39,6 @@
     <servlet>
         <servlet-name>TestServlet</servlet-name>
         <servlet-class>org.dhara.portal.web.Test.TestServlet</servlet-class>
-
     </servlet>
     <!--<servlet-mapping>
         <servlet-name>AxisServlet</servlet-name>

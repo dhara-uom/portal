@@ -30,7 +30,7 @@ public class TestServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String workflowId=request.getParameter("workflowId");
+            String workflowId=request.getParameter("workflowId");
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
         CodeGenService codeGenService= (CodeGenService) context.getBean("codeGenService");
