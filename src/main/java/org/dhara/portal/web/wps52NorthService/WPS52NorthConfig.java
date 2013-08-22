@@ -1,8 +1,8 @@
-package org.dhara.portal.web.wpsService52;
+package org.dhara.portal.web.wps52NorthService;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;
-import org.dhara.portal.web.codegen.CodegenUtils;
+import org.dhara.portal.web.codegenService.CodegenUtils;
 import org.dhara.portal.web.exception.PortalException;
 
 import javax.xml.namespace.QName;

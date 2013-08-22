@@ -1,7 +1,7 @@
 package org.dhara.portal.web.controllers;
 
 import org.apache.airavata.workflow.model.wf.Workflow;
-import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
+import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.helper.WorkflowHelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;

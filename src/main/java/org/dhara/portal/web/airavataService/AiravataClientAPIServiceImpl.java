@@ -1,4 +1,4 @@
-package org.dhara.portal.web.airavataClient;
+package org.dhara.portal.web.airavataService;
 
 import org.apache.airavata.client.AiravataAPIFactory;
 import org.apache.airavata.client.api.AiravataAPI;

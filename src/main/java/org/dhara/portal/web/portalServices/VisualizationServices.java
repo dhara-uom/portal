@@ -1,4 +1,4 @@
-package org.dhara.portal.web.services;
+package org.dhara.portal.web.portalServices;
 
 import java.io.BufferedWriter;
 import java.io.File;

@@ -1,4 +1,4 @@
-package org.dhara.portal.web.codegen;
+package org.dhara.portal.web.codegenService;
 
 import org.dhara.portal.web.exception.PortalException;
 

@@ -2,10 +2,9 @@ package org.dhara.portal.web.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
-import org.dhara.portal.web.codegen.CodeGenService;
-import org.dhara.portal.web.wpsService52.WPS52NorthService;
-import org.dhara.portal.web.wpsService52.WPSConnect52ServiceImpl;
+import org.dhara.portal.web.airavataService.AiravataClientAPIService;
+import org.dhara.portal.web.codegenService.CodeGenService;
+import org.dhara.portal.web.wps52NorthService.WPS52NorthService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;

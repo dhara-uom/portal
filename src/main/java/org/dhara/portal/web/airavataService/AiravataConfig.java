@@ -1,4 +1,4 @@
-package org.dhara.portal.web.airavataClient;
+package org.dhara.portal.web.airavataService;
 
 import org.apache.axiom.om.OMElement;
 import org.apache.axiom.om.impl.builder.StAXOMBuilder;

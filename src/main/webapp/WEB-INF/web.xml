@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>ExecutionServlet</servlet-name>
-        <servlet-class>org.dhara.portal.web.NorthToAiravataConnect.WorkflowExecutionServlet</servlet-class>
+        <servlet-class>org.dhara.portal.web.northToAiravataConnector.WorkflowExecutionServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>

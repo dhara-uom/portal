@@ -19,19 +19,15 @@
  *
  */
 
-package org.dhara.portal.web.airavataClient;
+package org.dhara.portal.web.airavataService;
 
 import org.apache.airavata.client.api.AiravataAPI;
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
-import org.apache.airavata.client.api.ExecutionManager;
 import org.apache.airavata.ws.monitor.Monitor;
-import org.apache.airavata.ws.monitor.MonitorConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 
 public class MonitorWorkflow {
     private static final Logger log = LoggerFactory.getLogger(MonitorWorkflow.class);

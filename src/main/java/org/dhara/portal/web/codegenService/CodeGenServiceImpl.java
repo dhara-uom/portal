@@ -1,4 +1,4 @@
-package org.dhara.portal.web.codegen;
+package org.dhara.portal.web.codegenService;
 
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -6,7 +6,7 @@ import freemarker.template.TemplateException;
 import org.apache.airavata.workflow.model.component.ws.WSComponentPort;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
-import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
+import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.exception.PortalException;
 
 import java.io.*;

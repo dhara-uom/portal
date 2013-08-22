@@ -1,9 +1,8 @@
-package org.dhara.portal.web.NorthToAiravataConnect;
+package org.dhara.portal.web.northToAiravataConnector;
 
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
-import org.dhara.portal.web.airavataClient.AiravataClientAPIService;
-import org.dhara.portal.web.airavataClient.AiravataClientAPIServiceImpl;
+import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.json.simple.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;

@@ -1,4 +1,4 @@
-package org.dhara.portal.web.wpsService52;
+package org.dhara.portal.web.wps52NorthService;
 
 /**
  * Created with IntelliJ IDEA.

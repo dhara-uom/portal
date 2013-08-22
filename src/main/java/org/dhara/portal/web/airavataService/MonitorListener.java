@@ -19,7 +19,7 @@
  *
  */
 
-package org.dhara.portal.web.airavataClient;
+package org.dhara.portal.web.airavataService;
 
 import org.apache.airavata.ws.monitor.EventData;
 import org.apache.airavata.ws.monitor.EventDataListener;
