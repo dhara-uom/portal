@@ -22,6 +22,9 @@ import java.util.*;
 public class CodeGenServiceImpl implements CodeGenService{
     private AiravataClientAPIService airavataClientAPIService;
 
+    /**
+    * @see org.dhara.portal.web.codegenService.CodeGenService#getGeneratedClass(String) ()
+    */
     public String getGeneratedClass(String workflowId) throws PortalException {
         Workflow workflow=airavataClientAPIService.getWorkflow(workflowId);
         List<WorkflowInput> workflowInputs = null;
@@ -125,6 +128,9 @@ public class CodeGenServiceImpl implements CodeGenService{
         return classContents;
     }
 
+    /**
+     * @see org.dhara.portal.web.codegenService.CodeGenService#getGeneratedClassForCustomDeployment(String, java.util.Map, java.util.Map, String) ()
+     */
     public String getGeneratedClassForCustomDeployment(String worklfowId, Map<String, String> inputsMapping, Map<String, String> outputsMapping, String extendingAlgorithm) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }

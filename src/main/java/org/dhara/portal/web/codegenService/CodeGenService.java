@@ -13,7 +13,21 @@ import java.util.Map;
  */
 public interface CodeGenService {
 
+    /**
+     * Generate the class for the given workflow
+     * @param workflowId workflow id of the workflow which class need to be generated
+     * @return
+     * @throws PortalException
+     */
     public String getGeneratedClass(String workflowId) throws PortalException;
 
+    /**
+     * Custom class generation
+     * @param worklfowId
+     * @param inputsMapping
+     * @param outputsMapping
+     * @param extendingAlgorithm
+     * @return
+     */
     public String getGeneratedClassForCustomDeployment(String worklfowId,Map<String,String> inputsMapping, Map<String,String> outputsMapping,String extendingAlgorithm);
 }

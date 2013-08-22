@@ -12,6 +12,10 @@ import java.util.Map;
  * Time: 3:25 PM
  * To change this template use File | Settings | File Templates.
  */
+
+/**
+ * Util class to keep constants and values and helper methods
+ */
 public class CodegenUtils {
     private static List<String> methods=new ArrayList<String>();
     private static List<String> imports=new ArrayList<String>();

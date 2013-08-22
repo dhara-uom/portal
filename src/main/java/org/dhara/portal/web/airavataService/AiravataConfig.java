@@ -45,6 +45,10 @@ public class AiravataConfig {
         return file.exists();
     }
 
+    /**
+     * Set defualt config
+     * @throws PortalException
+     */
     private void setDefaultConfig() throws PortalException {
         this.setPassword("admin");
         this.setUserName("admin");
@@ -54,6 +58,10 @@ public class AiravataConfig {
         this.setServerUrl("localhost");
     }
 
+    /**
+     * If config exists create airavata configuration from xml
+     * @throws PortalException
+     */
     private void setAiravataConfiguration() throws PortalException {
         File file= new File("airavata_config.xml");
         FileInputStream fis;

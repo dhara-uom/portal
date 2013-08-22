@@ -30,6 +30,9 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     private AiravataConfig airavataConfig;
 
+    /**
+     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#getAllWorkflows()
+     */
     public List<Workflow> getAllWorkflows() throws PortalException {
         List<Workflow> workflows = null;
         AiravataAPI airavataAPI=getAiravataAPI();
@@ -42,12 +45,18 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return workflows;
     }
 
+    /**
+     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#getExperimentData()
+     */
     public List<ExperimentData> getExperimentData() throws PortalException, AiravataAPIInvocationException {
         AiravataAPI airavataAPI=getAiravataAPI();
         List<ExperimentData> experimentByUser = airavataAPI.getProvenanceManager().getExperimentDataList();
         return experimentByUser;
     }
 
+    /**
+     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#getWorkflow(String) ()
+     */
     public Workflow getWorkflow(String identifier) throws PortalException {
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = null;
@@ -60,6 +69,9 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return workflow;
     }
 
+    /**
+     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#executeWorkflow(java.util.Map, String) ()
+     */
     public Map<String,Object> executeWorkflow(Map<String, Object> inputs, String workflowId) throws Exception {
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
@@ -118,6 +130,9 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         this.airavataConfig = airavataConfig;
     }
 
+    /**
+     * @see AiravataClientAPIService#getWorkflowExecutionData() ()
+     */
     public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException,
             ExperimentLazyLoadedException {
         AiravataAPI airavataAPI = getAiravataAPI();
@@ -146,6 +161,9 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return nodeData;
     }
 
+    /**
+     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#getNodeData(org.apache.airavata.registry.api.workflow.ExperimentData) ()
+     */
     public List<NodeExecutionData> getNodeData(ExperimentData experimentData)
             throws ExperimentLazyLoadedException, PortalException, AiravataAPIInvocationException {
         String experimentId = experimentData.getExperimentId();
