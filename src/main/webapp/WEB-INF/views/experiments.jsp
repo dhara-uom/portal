@@ -253,7 +253,7 @@
 
                            <div class="diplay_table">
                             <display:table uid="user" name="message" defaultsort="1"
-                                           defaultorder="ascending" pagesize="10">
+                                           defaultorder="ascending" pagesize="10" requestURI="">
                                 <div class="table_column">
                                 <display:column property="name" sortable="false" title="Experiment Name"
                                                 maxLength="100" />
@@ -274,7 +274,7 @@
                                 <display:setProperty name="paging.banner.group_size" value="10" />
                                 <display:setProperty name="paging.banner.item_name" value="experiment" />
                                 <display:setProperty name="paging.banner.item_names" value="experiments" />
-
+                                <display:setProperty name="paging.banner.onepage" value=" " />
                             </display:table>
 
                            </div>
