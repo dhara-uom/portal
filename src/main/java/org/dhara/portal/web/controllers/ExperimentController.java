@@ -47,7 +47,7 @@ public class ExperimentController extends AbstractController {
 
         Map paramMap = WebUtils.getParametersStartingWith(httpServletRequest, "d-");
         if (paramMap.size() == 0) {
-            WebUtils.setSessionAttribute(httpServletRequest, "userList", experimentHelpers);
+            WebUtils.setSessionAttribute(httpServletRequest, "experiments", experimentHelpers);
         }
 
         ModelAndView model = new ModelAndView("experiments");

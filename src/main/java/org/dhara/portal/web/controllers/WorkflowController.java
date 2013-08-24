@@ -42,7 +42,7 @@ public class WorkflowController extends AbstractController {
 
         Map paramMap = WebUtils.getParametersStartingWith(httpServletRequest, "d-");
         if (paramMap.size() == 0) {
-            WebUtils.setSessionAttribute(httpServletRequest, "userList", workflowHelpers);
+            WebUtils.setSessionAttribute(httpServletRequest, "workflows", workflowHelpers);
         }
 
         ModelAndView model = new ModelAndView("workflows");
