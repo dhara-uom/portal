@@ -1,3 +1,4 @@
+<%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
 <%--
@@ -214,51 +215,28 @@
 
                         <div class="slate clearfix">
 
-                            <table  align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">
-                                <thead>
-                                <tr class="border_bottom">
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Workflow Name</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Created by</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Date Created</FONT></th>
-                                    <th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Deployment options</FONT></th>
-                                </tr>
-                                </thead>
 
-                                <c:forEach items="${message}" var="workflow" varStatus="loop">
-                                    <tr class="border_bottom">
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value="${workflow.name}"></c:out></FONT>
-                                        </td>
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value=""></c:out></FONT>
-                                        </td>
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><c:out value=""></c:out></FONT>
-                                        </td>
-                                        <td>
-                                            <FONT COLOR=#4B3232 SIZE="2"><a href="deployWorkflow.htm?workflowId=${workflow.name}">Deafult</a> <a href=""> Custom</a></FONT>
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </table>
                                 <div class="diplay_table">
                                     <display:table uid="user" name="message" defaultsort="1"
                                                    defaultorder="ascending" pagesize="10" requestURI="">
+
                                         <div class="table_column">
                                             <display:column property="name" sortable="false" title="Workflow Name"
                                                             maxLength="100" />
                                         </div>
                                         <div class="table_column">
-                                            <display:column property="" sortable="false" title="Created by"
+                                            <display:column  sortable="false" title="Created by"
                                                             maxLength="175" />
                                         </div>
                                         <div class="table_column">
-                                            <display:column property="" sortable="false"
+                                            <display:column  sortable="false"
                                                             title="Date Created" maxLength="100" />
                                         </div>
                                         <div class="table_column">
-                                            <display:column property="" sortable="false" title="Deployment options"
-                                                            maxLength="100" />
+                                            <display:column sortable="false" title="Deployment options"
+                                                            maxLength="100" >
+                                                <a href="deployWorkflow.htm?workflowId=${user.name}"> Deafult</a> <a href=""> Custom</a>
+                                                            </display:column>
                                         </div>
                                         <display:setProperty name="basic.empty.showtable" value="true" />
                                         <display:setProperty name="paging.banner.group_size" value="10" />

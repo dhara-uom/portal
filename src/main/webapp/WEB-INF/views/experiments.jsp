@@ -218,38 +218,7 @@
                     <div class="span10">
 
                         <div class="slate clearfix">
-                            <%--<div class="diplay_table">--%>
-                            <%--<table id="experimentListTable" align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">--%>
-                                <%--<div class="table_headers">--%>
-                                <%--<thead>--%>
-                                <%--<tr class="border_bottom">--%>
-                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Experiment Name</FONT></th>--%>
-                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Last updated</FONT></th>--%>
-                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Author</FONT></th>--%>
-                                    <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">State</FONT></th>--%>
-                                <%--</tr>--%>
-                                <%--</thead>--%>
-                                <%--</div>--%>
-                                <%--<div class="table_data">--%>
-                                <%--<c:forEach items="${message}" var="experiment" varStatus="loop">--%>
-                                    <%--<tr class="border_bottom">--%>
-                                        <%--<td>--%>
-                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.name}"></c:out></FONT>--%>
-                                        <%--</td>--%>
-                                        <%--<td>--%>
-                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.updatedTime}"></c:out></FONT>--%>
-                                        <%--</td>--%>
-                                        <%--<td>--%>
-                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.author}"></c:out></FONT>--%>
-                                        <%--</td>--%>
-                                        <%--<td>--%>
-                                            <%--<FONT COLOR=#4B3232 SIZE="2"><c:out value="${experiment.state}"></c:out></FONT>--%>
-                                        <%--</td>--%>
-                                    <%--</tr>--%>
-                                <%--</c:forEach>--%>
-                                <%--</div>--%>
-                            <%--</table>--%>
-                            <%--</div>--%>
+
 
                            <div class="diplay_table">
                             <display:table uid="user" name="message" defaultsort="1"
