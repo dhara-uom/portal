@@ -32,25 +32,51 @@
 
     <style type="text/css">
 
-        tr.border_bottom td{
-            border-bottom:1pt solid black;
-        }
 
         tr:hover {
             background: #F8DBB0;
         }
 
-    </style>
-    <%--<script type="text/javascript">--%>
-        <%--function limitRows(){--%>
-            <%--var maxRows = 10;--%>
-            <%--var table = Document.getElementById("experimentListTable");--%>
-            <%--var rowsInTable = table.rows.length;--%>
-            <%--if(rowsInTable>maxRows){--%>
 
-            <%--}--%>
-        <%--}--%>
-    <%--</script>--%>
+        th {
+            background-color:#F0AF37 ;
+            font-size: 100%;
+            color: #804000;
+
+        }
+        .diplay_table {
+            display: table;
+            margin: auto;
+            text-align: center;
+        }
+
+        .table_column th{
+            display: table-column;
+            color: #804000;
+            /*font-family: sans-serif;*/
+            height: 10px;
+            padding: 15;
+        }
+
+        .diplay_table table td {
+            border-bottom-color: #000000;
+            border-bottom: 1pt solid #000000;
+            /*font-family: sans-serif;*/
+            font-size: 77%;
+            color: #000000;
+            padding: 15;
+            text-align: center;
+        }
+
+        .diplay_table table th {
+            /*font-family: "DejaVu Sans Mono";*/
+            padding: 15;
+        }
+
+
+
+    </style>
+
 </head>
 <body>
 
@@ -192,8 +218,9 @@
                     <div class="span10">
 
                         <div class="slate clearfix">
-
+                            <%--<div class="diplay_table">--%>
                             <%--<table id="experimentListTable" align="center" BGCOLOR="#FF0000" BORDER="0" CELLPADDING="15" CELLSPACING="0">--%>
+                                <%--<div class="table_headers">--%>
                                 <%--<thead>--%>
                                 <%--<tr class="border_bottom">--%>
                                     <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">Experiment Name</FONT></th>--%>
@@ -202,7 +229,8 @@
                                     <%--<th BGCOLOR="#F0AF37"><FONT COLOR=#804000 SIZE="3">State</FONT></th>--%>
                                 <%--</tr>--%>
                                 <%--</thead>--%>
-
+                                <%--</div>--%>
+                                <%--<div class="table_data">--%>
                                 <%--<c:forEach items="${message}" var="experiment" varStatus="loop">--%>
                                     <%--<tr class="border_bottom">--%>
                                         <%--<td>--%>
@@ -219,26 +247,37 @@
                                         <%--</td>--%>
                                     <%--</tr>--%>
                                 <%--</c:forEach>--%>
+                                <%--</div>--%>
                             <%--</table>--%>
+                            <%--</div>--%>
 
-
+                           <div class="diplay_table">
                             <display:table uid="user" name="message" defaultsort="1"
-                                           defaultorder="ascending" pagesize="10">
-                                <display:column property="name" sortable="true" title="Experiment Name"
+                                           defaultorder="ascending" pagesize="10" requestURI="">
+                                <div class="table_column">
+                                <display:column property="name" sortable="false" title="Experiment Name"
                                                 maxLength="100" />
-                                <display:column property="updatedTime" sortable="true" title="Last updated"
-                                                maxLength="100" />
-                                <display:column property="author" sortable="true"
+                                </div>
+                                <div class="table_column">
+                                <display:column property="updatedTime" sortable="false" title="Last updated"
+                                                maxLength="175" />
+                                </div>
+                                <div class="table_column">
+                                <display:column property="author" sortable="false"
                                                 title="Author" maxLength="100" />
-                                <display:column property="state" sortable="true" title="State"
+                                 </div>
+                                <div class="table_column">
+                                <display:column property="state" sortable="false" title="State"
                                                 maxLength="100" />
+                                </div>
                                 <display:setProperty name="basic.empty.showtable" value="true" />
                                 <display:setProperty name="paging.banner.group_size" value="10" />
                                 <display:setProperty name="paging.banner.item_name" value="experiment" />
                                 <display:setProperty name="paging.banner.item_names" value="experiments" />
-
+                                <display:setProperty name="paging.banner.onepage" value=" " />
                             </display:table>
 
+                           </div>
 
                         </div>
 
