@@ -16,7 +16,7 @@ function init(){
     vector_layer = new OpenLayers.Layer.Vector("KML", {
         strategies: [new OpenLayers.Strategy.Fixed(),new OpenLayers.Strategy.Cluster()],
         protocol: new OpenLayers.Protocol.HTTP({
-            url: "flicker_data.kml",
+            url: "visualize/flicker_data.kml",
             format: new OpenLayers.Format.KML({
                 extractAttributes: true,
                 extractStyles:true,
