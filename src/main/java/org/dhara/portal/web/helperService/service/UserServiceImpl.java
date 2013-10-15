@@ -1,11 +1,7 @@
-package org.dhara.portal.web.springHibernateSample.service;
+package org.dhara.portal.web.helperService.service;
 
-import org.dhara.portal.web.springHibernateSample.dao.UserDao;
-import org.dhara.portal.web.springHibernateSample.entity.Customer;
-import org.hibernate.Criteria;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
+import org.dhara.portal.web.helperService.dao.UserDao;
+import org.dhara.portal.web.helperService.entity.Customer;
 
 import java.util.List;
 

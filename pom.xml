@@ -13,9 +13,8 @@
 
         <dependency>
             <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
+            <artifactId>junit-dep</artifactId>
+            <version>4.8.2</version>
         </dependency>
 
         <dependency>
@@ -269,6 +268,11 @@
             <version>1.1.1</version>
         </dependency>
 
+        <dependency>
+            <groupId>displaytag</groupId>
+            <artifactId>displaytag</artifactId>
+            <version>1.1.1</version>
+        </dependency>
 
     </dependencies>
 

@@ -1,17 +1,20 @@
-package org.dhara.portal.web.springHibernateSample.service;
-
-import org.dhara.portal.web.springHibernateSample.entity.Customer;
-
-import java.util.List;
+package org.dhara.portal.web.helperService.dao;
 
 /**
  * Created with IntelliJ IDEA.
  * User: harsha
  * Date: 7/9/13
- * Time: 1:06 PM
+ * Time: 1:03 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface UserService {
+
+import org.dhara.portal.web.helperService.entity.Customer;
+
+import java.util.List;
+
+public interface UserDao {
+
     public void saveOrUpdateCustomer(Customer customer);
     public List<Customer> fetchALLCustomers();
+
 }

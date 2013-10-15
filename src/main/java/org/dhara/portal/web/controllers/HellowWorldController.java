@@ -11,8 +11,8 @@ package org.dhara.portal.web.controllers;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.dhara.portal.web.springHibernateSample.entity.Customer;
-import org.dhara.portal.web.springHibernateSample.service.UserService;
+import org.dhara.portal.web.helperService.entity.Customer;
+import org.dhara.portal.web.helperService.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;

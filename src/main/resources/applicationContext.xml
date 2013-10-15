@@ -37,13 +37,13 @@
         <property name = "sessionFactory" ref = "sessionFactory" />
     </bean>
 
-    <bean id="userDao" class="org.dhara.portal.web.springHibernateSample.dao.HibernateUserDao">
+    <bean id="userDao" class="org.dhara.portal.web.helperService.dao.HibernateUserDao">
         <property name="sessionFactory">
             <ref bean="sessionFactory"/>
         </property>
     </bean>
 
-    <bean id="userService" class="org.dhara.portal.web.springHibernateSample.service.UserServiceImpl">
+    <bean id="userService" class="org.dhara.portal.web.helperService.service.UserServiceImpl">
         <property name="userDao">
             <ref bean="userDao"/>
         </property>

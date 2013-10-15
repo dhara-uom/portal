@@ -14,12 +14,12 @@
 
     <display-name>Dhara Portal</display-name>
 
-    <!--<jsp-config>-->
-        <!--<taglib>-->
-            <!--<taglib-uri>http://displaytag.sf.net</taglib-uri>-->
-            <!--<taglib-location>/WEB-INF/lib/displaytag.tld</taglib-location>-->
-        <!--</taglib>-->
-    <!--</jsp-config>-->
+    <!--<jsp-config>
+        <taglib>
+            <taglib-uri>http://displaytag.sf.net</taglib-uri>
+            <taglib-location>/WEB-INF/lib/displaytag.tld</taglib-location>
+        </taglib>
+    </jsp-config>-->
 
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
@@ -35,7 +35,7 @@
     </servlet>
     <servlet>
         <servlet-name>TestServlet</servlet-name>
-        <servlet-class>org.dhara.portal.web.Test.TestServlet</servlet-class>
+        <servlet-class>org.dhara.portal.web.TestService.TestServlet</servlet-class>
     </servlet>
     <!--<servlet-mapping>
         <servlet-name>AxisServlet</servlet-name>

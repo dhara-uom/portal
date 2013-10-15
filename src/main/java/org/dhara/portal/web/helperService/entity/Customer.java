@@ -1,4 +1,4 @@
-package org.dhara.portal.web.springHibernateSample.entity;
+package org.dhara.portal.web.helperService.entity;
 
 /**
  * Created with IntelliJ IDEA.

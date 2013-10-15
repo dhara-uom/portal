@@ -1,4 +1,4 @@
-package org.dhara.portal.web.Test;
+package org.dhara.portal.web.TestService;
 
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.codegenService.CodeGenService;
