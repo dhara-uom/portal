@@ -8,13 +8,16 @@ import org.apache.airavata.client.api.WorkflowManager;
 import org.apache.airavata.registry.api.PasswordCallback;
 import org.apache.airavata.registry.api.exception.worker.ExperimentLazyLoadedException;
 import org.apache.airavata.registry.api.impl.WorkflowExecutionDataImpl;
-import org.apache.airavata.registry.api.workflow.*;
+import org.apache.airavata.registry.api.workflow.ExperimentData;
+import org.apache.airavata.registry.api.workflow.NodeExecutionData;
+import org.apache.airavata.registry.api.workflow.OutputData;
 import org.apache.airavata.rest.client.PasswordCallbackImpl;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.exception.PortalException;
 
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -175,5 +178,14 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
 
         return nodeData;
+    }
+
+    public void monitorWorkflow() throws PortalException, AiravataAPIInvocationException, URISyntaxException {
+        AiravataAPI airavataAPI = getAiravataAPI();
+        MonitorWorkflow monitorWorkflow = new MonitorWorkflow();
+        String experimentId = "";  //TODO hard coded experiment Id
+        monitorWorkflow.monitor(experimentId,airavataAPI);
+        //parse experiment id to monitor() method in monitorWorkflow class
+        //we can run experiment without specifying inputs (it runs with its earlier inputs and configurations)
     }
 }
