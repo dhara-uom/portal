@@ -214,8 +214,6 @@
                     <div class="span10">
 
                         <div class="slate clearfix">
-
-
                                 <div class="diplay_table">
                                     <display:table uid="user" name="message" defaultsort="1"
                                                    defaultorder="ascending" pagesize="10" requestURI="">
@@ -235,7 +233,7 @@
                                         <div class="table_column">
                                             <display:column sortable="false" title="Deployment options"
                                                             maxLength="100" >
-                                                <a href="deployWorkflow.htm?workflowId=${user.name}"> Deafult</a> <a href=""> Custom</a>
+                                                <a href="deployWorkflow.htm?workflowId=${user.name}">Deafult</a> <a href="customDeploy.htm?workflowId=${user.name}"> Custom</a>
                                                             </display:column>
                                         </div>
                                         <display:setProperty name="basic.empty.showtable" value="true" />

@@ -232,7 +232,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             }
         }
 
-        String classContents=generateClassFromTemplate(inputIds,outputIds,workflow.getName(),CodegenUtils.defaultExtendingClass,inputBindings,outputBindings,inputs,outputs);
+        String classContents=generateClassFromTemplate(inputIds,outputIds,workflow.getName(),extendingAlgorithm,inputBindings,outputBindings,inputs,outputs);
         return classContents;
     }
 
@@ -244,6 +244,8 @@ public class CodeGenServiceImpl implements CodeGenService{
             //String current = new java.io.File( "." ).getCanonicalPath();
             //fg.setDirectoryForTemplateLoading(new File(
             //current));
+            File file1=new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"templates");
+            cfg.setDirectoryForTemplateLoading(file1);
             Template template = cfg.getTemplate("wpstemplate.ftl");
 
             // Build the data-model

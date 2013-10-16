@@ -7,6 +7,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.codegenService.CodeGenService;
+import org.dhara.portal.web.helper.MappingHelper;
 import org.dhara.portal.web.helper.WorkflowHelper;
 import org.dhara.portal.web.wps52NorthService.WPS52NorthService;
 import org.springframework.context.ApplicationContext;
@@ -66,7 +67,7 @@ public class WorkflowCustomDeploymentController extends SimpleFormController {
         return model;
     }
 
-    @Override
+    /*@Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
         String workflowId=request.getParameter("workflowId");
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
@@ -75,7 +76,7 @@ public class WorkflowCustomDeploymentController extends SimpleFormController {
         ModelAndView model = new ModelAndView("workflows");
         model.addObject("workflow", workflow);
         return model;
-    }
+    }*/
 
     protected Map<String,Object> referenceData(HttpServletRequest request) throws Exception {
         Map<String,Object> modelMap=new HashMap<String, Object>();
@@ -85,15 +86,22 @@ public class WorkflowCustomDeploymentController extends SimpleFormController {
         List<Workflow> workflowList=airavataClientAPIService.getAllWorkflows();
         List<WorkflowHelper> workflowHelpers=new ArrayList<WorkflowHelper>();
         Workflow workflow=airavataClientAPIService.getWorkflow(workflowId);
-        List<String> inputNodes=new ArrayList<String>();
-        List<String> outputNodes=new ArrayList<String>();
+        List<MappingHelper> inputNodes=new ArrayList<MappingHelper>();
+        List<MappingHelper> outputNodes=new ArrayList<MappingHelper>();
+
 
         for(WorkflowInput workflowInput:workflow.getWorkflowInputs()) {
-            inputNodes.add(workflowInput.getName());
+            MappingHelper mappingHelper=new MappingHelper();
+            mappingHelper.setNodeName(workflowInput.getName());
+            mappingHelper.setExistingMapping(workflowInput.getType());
+            inputNodes.add(mappingHelper);
         }
 
         for(WSComponentPort workflowOutput : workflow.getOutputs()) {
-            outputNodes.add(workflowOutput.getName());
+            MappingHelper mappingHelper=new MappingHelper();
+            mappingHelper.setNodeName(workflowOutput.getName());
+            mappingHelper.setExistingMapping(workflowOutput.getType().getLocalPart());
+            outputNodes.add(mappingHelper);
         }
 
         modelMap.put("workflowList",workflowHelpers);
