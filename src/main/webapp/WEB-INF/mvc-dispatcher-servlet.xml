@@ -10,7 +10,7 @@
     <bean name="/experimentList.htm" class="org.dhara.portal.web.controllers.ExperimentController"/>
     <bean name="/workflowList.htm" class="org.dhara.portal.web.controllers.WorkflowController"/>
     <bean name="/deployWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowDeploymentController"/>
-    <bean name="/workflowData.htm" class="org.dhara.portal.web.controllers.WorkflowMontorController"></bean>
+    <!--<bean name="/workflowData.htm" class="org.dhara.portal.web.controllers.WorkflowExperimentDataController"></bean>-->
 
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver" >

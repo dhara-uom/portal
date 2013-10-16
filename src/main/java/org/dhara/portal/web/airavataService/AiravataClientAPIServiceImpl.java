@@ -42,6 +42,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         WorkflowManager workflowManager=airavataAPI.getWorkflowManager();
         try {
             workflows=workflowManager.getWorkflows();
+
         } catch (AiravataAPIInvocationException e) {
             e.printStackTrace();
         }
@@ -133,33 +134,12 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         this.airavataConfig = airavataConfig;
     }
 
-    /**
-     * @see AiravataClientAPIService#getWorkflowExecutionData() ()
-     */
-    public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException,
+
+    public List<NodeExecutionData> getWorkflowExperimentData(String experimentId) throws PortalException, AiravataAPIInvocationException,
             ExperimentLazyLoadedException {
-        AiravataAPI airavataAPI = getAiravataAPI();
-        ProvenanceManager provenanceManager = airavataAPI.getProvenanceManager();
-        String experimentId = "";
-        String workflowInstanceId = "";
 
-        List<ExperimentData>  experimentDataList = getExperimentData();
-        for (ExperimentData experimentData: experimentDataList){
-            List<WorkflowExecutionDataImpl> workflowInstanceData = experimentData.getWorkflowExecutionDataList();
-//            for (WorkflowExecutionDataImpl workflowInstance : workflowInstanceData){
-//                experimentId = workflowInstance.getExperimentId();
-//                workflowInstanceId = workflowInstance.getWorkflowInstanceId();
-//            }
-        }
-
-        ExperimentData ed = experimentDataList.get(0);
-        experimentId = ed.getExperimentId();
-        workflowInstanceId = ed.getWorkflowExecutionDataList().get(0).getWorkflowInstanceId();
-
-        //This only will return the nodeData of first experimentId, instanceId pair of the above for-loop
-        List<NodeExecutionData> nodeData =
-                provenanceManager.getWorkflowInstanceData(experimentId,workflowInstanceId).getNodeDataList();
-
+        ExperimentData data = getAiravataAPI().getProvenanceManager().getExperimentData(experimentId);
+        List<NodeExecutionData> nodeData = data.getNodeDataList();
 
         return nodeData;
     }

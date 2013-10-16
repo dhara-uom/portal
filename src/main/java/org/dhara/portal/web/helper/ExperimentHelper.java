@@ -1,6 +1,7 @@
 package org.dhara.portal.web.helper;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,6 +16,7 @@ public class ExperimentHelper {
     private String author;
     private Date updatedTime;
     private String state;
+    private List<Nodehelper> nodehelperList;
 
 
     public String getName() {
@@ -47,5 +49,13 @@ public class ExperimentHelper {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public List<Nodehelper> getNodehelperList() {
+        return nodehelperList;
+    }
+
+    public void setNodehelperList(List<Nodehelper> nodehelperList) {
+        this.nodehelperList = nodehelperList;
     }
 }
