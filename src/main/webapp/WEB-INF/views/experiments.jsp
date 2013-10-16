@@ -27,18 +27,27 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script type="text/javascript">
+        function showTable(table_id){
+            if(document.getElementById(table_id).style.display == "none")
+                document.getElementById(table_id).style.display = "block";
+            else
+                document.getElementById(table_id).style.display = "none";
+        }
+    </script>
+
 
     <style type="text/css">
 
 
-        tr:hover {
+        .diplay_table tr:hover {
             background: #F8DBB0;
         }
 
 
-        th {
+        .diplay_table th {
             background-color:#F0AF37 ;
             font-size: 100%;
             color: #804000;
@@ -53,7 +62,7 @@
         .table_column th{
             display: table-column;
             color: #804000;
-            /*font-family: sans-serif;*/
+            font-family: sans-serif;
             height: 10px;
             padding: 15;
         }
@@ -68,12 +77,39 @@
             text-align: center;
         }
 
-        .diplay_table table th {
+        /*.diplay_table table th {*/
             /*font-family: "DejaVu Sans Mono";*/
-            padding: 15;
+            /*display: table-column;*/
+            /*color: #804000;*/
+            /*font-family: sans-serif;*/
+            /*height: 10px;*/
+            /*padding: 15;*/
+        /*}*/
+
+        .inner_table th{
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #dedede;
         }
 
+        .inner_table td{
+            border-width: 1px;
+            padding: 8px;
+            border-style: solid;
+            border-color: #666666;
+            background-color: #ffffff;
+        }
 
+        .inner_table table{
+            font-family: verdana,arial,sans-serif;
+            font-size:5px;
+            color:#333333;
+            border-width: 1px;
+            border-color: #666666;
+            border-collapse: collapse;
+        }
 
     </style>
 
@@ -237,13 +273,44 @@
                                  </div>
                                 <div class="table_column">
                                 <display:column property="state" sortable="false" title="State"
-                                                maxLength="100" />
+                                                maxLength="100">
+                                </display:column>
                                 </div>
+                                <div>
+                                    <display:column>
+                                    <a href="#" onclick="showTable('${user.nodehelperList}')" >More...</a>
+                                    <table class="inner_table" id="${user.nodehelperList}" style="display:none">
+                                        <tr>
+                                            <th>Node Type</th>
+                                            <th>Workflow Instance Node Id</th>
+                                            <th>Input</th>
+                                            <th>Output</th>
+                                        </tr>
+                                        <c:forEach var="item" items="${user.nodehelperList}">
+
+                                            <tr>
+                                                <td>  ${item.type} </td>
+                                                <td> ${item.workflowInstanceNodeId} </td>
+                                                <td> ${item.input} </td>
+                                                <td> ${item.output} </td>
+
+                                            </tr>
+
+                                        </c:forEach>
+                                    </table>
+                                    </display:column>
+                                 <%--<c:forEach var="item" items="${user.nodehelperList}">--%>
+                                <%--<display:column title="${item.workflowInstanceNodeId}">${item.workflowInstanceNodeId}</display:column>--%>
+                                 <%--</c:forEach>--%>
+                                </div>
+
                                 <display:setProperty name="basic.empty.showtable" value="true" />
                                 <display:setProperty name="paging.banner.group_size" value="10" />
                                 <display:setProperty name="paging.banner.item_name" value="experiment" />
                                 <display:setProperty name="paging.banner.item_names" value="experiments" />
                                 <display:setProperty name="paging.banner.onepage" value=" " />
+
+
                             </display:table>
 
                            </div>
