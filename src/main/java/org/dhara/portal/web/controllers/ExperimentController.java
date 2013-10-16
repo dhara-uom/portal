@@ -1,8 +1,10 @@
 package org.dhara.portal.web.controllers;
 
 import org.apache.airavata.registry.api.workflow.ExperimentData;
+import org.apache.airavata.registry.api.workflow.NodeExecutionData;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.helper.ExperimentHelper;
+import org.dhara.portal.web.helper.Nodehelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -40,7 +42,22 @@ public class ExperimentController extends AbstractController {
              helper.setUpdatedTime(data.getStatusUpdateTime());
              helper.setAuthor(data.getUser());
              helper.setState(data.getState().toString());
-             experimentHelpers.add(helper);
+
+            //retrieve experiment data by id
+            List<NodeExecutionData> nodeExecutionDataList = airavataClientAPIService.getWorkflowExperimentData(data.getExperimentId());
+            List<Nodehelper> nodehelperList = new ArrayList<Nodehelper>();
+
+            for(int i = 0; i< nodeExecutionDataList.size();i++){
+                Nodehelper nodehelper = new Nodehelper();
+                nodehelper.setType(nodeExecutionDataList.get(i).getType().name());
+                nodehelper.setInput(nodeExecutionDataList.get(i).getInput());
+                nodehelper.setOutput(nodeExecutionDataList.get(i).getOutput());
+                nodehelper.setWorkflowInstanceNodeId(nodeExecutionDataList.get(i).getWorkflowInstanceNode().getNodeId());
+                nodehelperList.add(nodehelper);
+            }
+
+            helper.setNodehelperList(nodehelperList);
+            experimentHelpers.add(helper);
 
         }
         experimentHelpers =  reverseList(experimentHelpers);

@@ -61,11 +61,11 @@ public interface AiravataClientAPIService {
     public List<NodeExecutionData> getNodeData(ExperimentData experimentData) throws ExperimentLazyLoadedException, PortalException, AiravataAPIInvocationException;
 
     /**
-     * Get workflow execution data
+     * Get workflow experiment data
      * @return
      * @throws PortalException
      * @throws AiravataAPIInvocationException
      * @throws ExperimentLazyLoadedException
      */
-    public List<NodeExecutionData> getWorkflowExecutionData() throws PortalException, AiravataAPIInvocationException, ExperimentLazyLoadedException;
+    public List<NodeExecutionData> getWorkflowExperimentData(String experimentId) throws PortalException, AiravataAPIInvocationException, ExperimentLazyLoadedException;
 }
