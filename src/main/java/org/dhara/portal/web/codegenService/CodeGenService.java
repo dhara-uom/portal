@@ -29,5 +29,5 @@ public interface CodeGenService {
      * @param extendingAlgorithm
      * @return
      */
-    public String getGeneratedClassForCustomDeployment(String worklfowId,Map<String,String> inputsMapping, Map<String,String> outputsMapping,String extendingAlgorithm);
+    public String getGeneratedClassForCustomDeployment(String worklfowId,Map<String,String> inputsMapping, Map<String,String> outputsMapping,String extendingAlgorithm) throws PortalException;
 }
