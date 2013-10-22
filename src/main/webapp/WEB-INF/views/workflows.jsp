@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
@@ -27,8 +28,27 @@
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+        function showTable(form_id){
+            if(document.getElementById(form_id).style.display == "none")
+                document.getElementById(form_id).style.display = "block";
+            else
+                document.getElementById(form_id).style.display = "none";
+        }
 
+
+        function concat(form_name){
+            var querystring;
+
+             $('#'+form_name).submit(function(){
+                querystring = $(this).serializeArray();
+             });
+
+            alert(querystring);
+        }
+    </script>
     <style type="text/css">
 
         tr:hover {
@@ -235,6 +255,25 @@
                                                             maxLength="100" >
                                                 <a href="deployWorkflow.htm?workflowId=${user.name}">Deafult</a> <a href="customDeploy.htm?workflowId=${user.name}"> Custom</a>
                                                             </display:column>
+                                        </div>
+                                        <div class="table_column">
+                                            <display:column>
+                                                <a href="#" onclick="showTable('${user.name}')" >Input values</a>
+                                                <form class="inner_table" id="${user.name}" style="display:none" action="#" >
+
+
+
+                                                    <c:forEach var="item" items="${user.inputs}" varStatus="outer">
+
+                                                        Input        ${item.name} (${item.type}) : <input type="text" name="${item.name}"><br>
+
+                                                    </c:forEach>
+
+
+                                                    <input type="submit" value="Submit" onclick="concat('${user.name}')"/>
+                                                    <a href="monitorWorkflow.htm?workflowId=${user.name}&inputs=${user.inputs}" >Monitor</a>
+                                                </form>
+                                            </display:column>
                                         </div>
                                         <display:setProperty name="basic.empty.showtable" value="true" />
                                         <display:setProperty name="paging.banner.group_size" value="10" />

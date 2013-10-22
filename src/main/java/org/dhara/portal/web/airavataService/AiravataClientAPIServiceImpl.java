@@ -17,7 +17,6 @@ import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.exception.PortalException;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,12 +159,29 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return nodeData;
     }
 
-    public void monitorWorkflow() throws PortalException, AiravataAPIInvocationException, URISyntaxException {
-        AiravataAPI airavataAPI = getAiravataAPI();
-        MonitorWorkflow monitorWorkflow = new MonitorWorkflow();
-        String experimentId = "";  //TODO hard coded experiment Id
-        monitorWorkflow.monitor(experimentId,airavataAPI);
-        //parse experiment id to monitor() method in monitorWorkflow class
-        //we can run experiment without specifying inputs (it runs with its earlier inputs and configurations)
+    public void monitorWorkflow(int[] inputs, String workflowId) throws Exception {
+
+        AiravataAPI airavataAPI=getAiravataAPI();
+        Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
+        //workflowId is workflow name
+        List<WorkflowInput> workflowInputs = workflow.getWorkflowInputs();
+        for (WorkflowInput workflowInput : workflowInputs) {
+            Object value=inputs[0];
+            if ("int".equals(workflowInput.getType())||"integer".equals(workflowInput.getType())) {
+                workflowInput.setValue((Integer)value);
+            } else if("String".equals(workflowInput.getType())){
+                workflowInput.setValue((String)value);
+            } else {
+                workflowInput.setValue((Object)value);
+            }
+        }
+
+        //airavata 0.7 stuck at this point
+        String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
+        MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
+        airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
+
+        //monitoring details can be printed to catalina.out file
+
     }
 }

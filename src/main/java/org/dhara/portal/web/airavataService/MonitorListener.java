@@ -36,6 +36,12 @@ public class MonitorListener implements EventDataListener {
     public void notify(EventDataRepository eventDataRepo, EventData eventData) {
         log.info("ExperimentID: " + eventData.getExperimentID());
         log.info("Message: " + eventData.getMessage());
+
+        System.out.println("/////////////////"+eventData.getMessage());
+        System.out.println("/////////"+eventData.getStatusText());
+        System.out.println("/////////"+eventData.getTimeText());
+
+        //Sout prints all the monitoring details to catalina.out file
     }
 
 

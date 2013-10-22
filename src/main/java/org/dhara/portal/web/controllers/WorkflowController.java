@@ -1,7 +1,9 @@
 package org.dhara.portal.web.controllers;
 
 import org.apache.airavata.workflow.model.wf.Workflow;
+import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
+import org.dhara.portal.web.helper.InputHelper;
 import org.dhara.portal.web.helper.WorkflowHelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -36,9 +38,22 @@ public class WorkflowController extends AbstractController {
             WorkflowHelper helper = new WorkflowHelper();
             Workflow workflow = workflowList.get(index);
             helper.setName(workflow.getName());
+            List<InputHelper> inputs = new ArrayList<InputHelper>();
+            for(WorkflowInput workflowInput:workflow.getWorkflowInputs()) {
+                InputHelper inputHelper = new InputHelper();
+                inputHelper.setName(workflowInput.getName());
+                inputHelper.setType(workflowInput.getType());
+                inputs.add(inputHelper);
+            }
+            helper.setInputs(inputs);
            //TODO get author and created data (need to implement methods)
             workflowHelpers.add(helper);
         }
+
+        //TODO inputs and the workflow to be monitored is hard coded
+        //TODO jsp cannot call controller
+//        int[] input_values = {10,20};
+//        airavataClientAPIService.monitorWorkflow(input_values,airavataClientAPIService.getAllWorkflows().get(1).getName());
 
         Map paramMap = WebUtils.getParametersStartingWith(httpServletRequest, "d-");
         if (paramMap.size() == 0) {
@@ -49,4 +64,6 @@ public class WorkflowController extends AbstractController {
         model.addObject("message", workflowHelpers);
         return model;
     }
+
+
 }
