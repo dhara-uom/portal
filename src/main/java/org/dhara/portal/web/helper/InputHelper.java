@@ -10,7 +10,9 @@ package org.dhara.portal.web.helper;
 public class InputHelper {
 
     private String name;
+    private String rawName;
     private String type;
+    private String[] values;
 
     public String getName() {
         return name;
@@ -26,5 +28,21 @@ public class InputHelper {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String[] getValues() {
+        return values;
+    }
+
+    public void setValues(String[] values) {
+        this.values = values;
+    }
+
+    public String getRawName() {
+        return rawName;
+    }
+
+    public void setRawName(String rawName) {
+        this.rawName = rawName;
     }
 }

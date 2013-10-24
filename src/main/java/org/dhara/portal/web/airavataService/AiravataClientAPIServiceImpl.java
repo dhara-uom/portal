@@ -159,7 +159,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return nodeData;
     }
 
-    public void monitorWorkflow(int[] inputs, String workflowId) throws Exception {
+    public List<MonitorMessage> monitorWorkflow(int[] inputs, String workflowId) throws Exception {
 
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
@@ -178,10 +178,10 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
         //airavata 0.7 stuck at this point
         String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
-        MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
+        List<MonitorMessage> events = MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
         airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
 
-        //monitoring details can be printed to catalina.out file
+        return events;
 
     }
 }

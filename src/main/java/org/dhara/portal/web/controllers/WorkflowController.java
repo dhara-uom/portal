@@ -50,10 +50,6 @@ public class WorkflowController extends AbstractController {
             workflowHelpers.add(helper);
         }
 
-        //TODO inputs and the workflow to be monitored is hard coded
-        //TODO jsp cannot call controller
-//        int[] input_values = {10,20};
-//        airavataClientAPIService.monitorWorkflow(input_values,airavataClientAPIService.getAllWorkflows().get(1).getName());
 
         Map paramMap = WebUtils.getParametersStartingWith(httpServletRequest, "d-");
         if (paramMap.size() == 0) {

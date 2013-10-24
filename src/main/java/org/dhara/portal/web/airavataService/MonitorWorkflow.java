@@ -44,7 +44,7 @@ public class MonitorWorkflow {
         experimentMonitor.startMonitoring();
     }
 
-    public static void monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
+    public static List<MonitorMessage> monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
         MonitorListener monitorListener = new MonitorListener();
         Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
                 monitorListener);
@@ -55,5 +55,8 @@ public class MonitorWorkflow {
         for(EventData ed : eventDataList){
             monitorListener.notify(dataRepository,ed);
         }
+
+        List<MonitorMessage> messages = monitorListener.getEvents();
+        return messages;
     }
 }

@@ -28,22 +28,30 @@ import org.apache.airavata.ws.monitor.Monitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MonitorListener implements EventDataListener {
 
     private static final Logger log = LoggerFactory.getLogger(MonitorListener.class);
 
+    private List<MonitorMessage> events = new ArrayList<MonitorMessage>();;
 
     public void notify(EventDataRepository eventDataRepo, EventData eventData) {
         log.info("ExperimentID: " + eventData.getExperimentID());
         log.info("Message: " + eventData.getMessage());
 
-        System.out.println("/////////////////"+eventData.getMessage());
-        System.out.println("/////////"+eventData.getStatusText());
-        System.out.println("/////////"+eventData.getTimeText());
-
-        //Sout prints all the monitoring details to catalina.out file
+        MonitorMessage monitorMessage = new MonitorMessage();
+        monitorMessage.setMesssage(eventData.getMessage());
+        monitorMessage.setStatusText(eventData.getStatusText());
+        monitorMessage.setTimestamp(eventData.getTimestamp());
+//        monitorMessage.setWorkflowName(eventData.getWorkflowID().toString());
+        events.add(monitorMessage);
     }
 
+    public List<MonitorMessage> getEvents(){
+        return this.events;
+    }
 
     public void setExperimentMonitor(Monitor monitor) {
         // TODO Auto-generated method stub
