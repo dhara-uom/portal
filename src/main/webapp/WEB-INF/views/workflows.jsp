@@ -1,3 +1,4 @@
+
 <%@ taglib prefix="display" uri="http://displaytag.sf.net" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
@@ -18,6 +19,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+
+    <%--<script src="http://dev.jquery.com/view/trunk/plugins/color/jquery.color.js" type="text/javascript"> </script>--%>
+
+
     <!-- Le styles -->
     <link href="http://fonts.googleapis.com/css?family=Oxygen|Marck+Script" rel="stylesheet" type="text/css">
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -26,9 +33,32 @@
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
-    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
 
+
+
+    <![endif]-->
+    <script type="text/javascript">
+
+        function showTable(form_id){
+            if(document.getElementById(form_id).style.display == "none") {
+                document.getElementById(form_id).style.display = "block";
+
+            }
+            else
+                document.getElementById(form_id).style.display = "none";
+        }
+
+        function readInputs(form_name){
+
+             var query = $('#'+form_name).serialize();
+             var link = "monitorWorkflow.htm?workflowId="+form_name+"&"+query;
+             return link;
+
+        }
+
+
+
+    </script>
     <style type="text/css">
 
         tr:hover {
@@ -236,6 +266,27 @@
                                                 <a href="deployWorkflow.htm?workflowId=${user.name}">Deafult</a> <a href="customDeploy.htm?workflowId=${user.name}"> Custom</a>
                                                             </display:column>
                                         </div>
+                                        <div class="table_column">
+                                            <display:column>
+                                                <a href="#" onclick="showTable('${user.name}')" >Input values</a>
+                                                <form class="inner_table" id="${user.name}" style="display:none" >
+
+
+
+                                                    <c:forEach var="item" items="${user.inputs}" varStatus="outer">
+
+                                                        Input        ${item.name} (${item.type}) : <input type="text" name="${item.name}/(${item.type})"><br>
+
+                                                    </c:forEach>
+
+
+                                                    <%--<input type="submit" value="Submit" onclick='readInputs("${user.name}")'/>--%>
+                                                    <%--<input type="hidden" name="${item.type}"/>--%>
+                                                    <%--<a name="${item.type}" href="monitorWorkflow.htm?workflowId=${user.name}&inputs=${user.inputs}" >Monitor</a>--%>
+                                                    <a name="${item.type}" href='javascript:document.location.href=readInputs("${user.name}");' >Monitor</a>
+                                                </form>
+                                            </display:column>
+                                        </div>
                                         <display:setProperty name="basic.empty.showtable" value="true" />
                                         <display:setProperty name="paging.banner.group_size" value="10" />
                                         <display:setProperty name="paging.banner.item_name" value="workflow" />
@@ -299,7 +350,7 @@
 <!-- Le javascript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<%--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>--%>
 <script src="assets/js/bootstrap.js"></script>
 
 

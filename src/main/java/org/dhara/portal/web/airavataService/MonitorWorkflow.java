@@ -23,20 +23,40 @@ package org.dhara.portal.web.airavataService;
 
 import org.apache.airavata.client.api.AiravataAPI;
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
+import org.apache.airavata.ws.monitor.EventData;
+import org.apache.airavata.ws.monitor.EventDataRepository;
 import org.apache.airavata.ws.monitor.Monitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URISyntaxException;
+import java.util.List;
 
 public class MonitorWorkflow {
     private static final Logger log = LoggerFactory.getLogger(MonitorWorkflow.class);
 
+    //TODO this method is already using in another class (correct it)  - WorkflowExecutionServlet.java
     public void monitor(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
         MonitorListener monitorListener = new MonitorListener();
         Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
                 monitorListener);
         log.info("Started the Workflow monitor");
         experimentMonitor.startMonitoring();
+    }
+
+    public static List<MonitorMessage> monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
+        MonitorListener monitorListener = new MonitorListener();
+        Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
+                monitorListener);
+        log.info("Started the Workflow monitor");
+        experimentMonitor.startMonitoring();
+        EventDataRepository dataRepository = experimentMonitor.getEventDataRepository();
+        List<EventData> eventDataList = dataRepository.getEvents();
+        for(EventData ed : eventDataList){
+            monitorListener.notify(dataRepository,ed);
+        }
+
+        List<MonitorMessage> messages = monitorListener.getEvents();
+        return messages;
     }
 }
