@@ -1,5 +1,6 @@
 package org.dhara.portal.web.codegenService;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +74,7 @@ public class CodegenUtils {
     public static final String TOUCHES_ALGORITHM="TouchesAlgorithm";
     public static final String WITHIN_ALGORITHM="WithinAlgorithm";
     public static final String EXECUTION_SERVLET="http://localhost:8090/portal/connect/ExecutionServlet";
-
+    public static String webappHome;
     static {
         getMethods().add(getInputDataTypeMethod);
         getMethods().add(getOutputDataTypeMethod);
@@ -125,7 +126,9 @@ public class CodegenUtils {
         getAlgorithms().add("OverlapsAlgorithm");
         getAlgorithms().add("TouchesAlgorithm");
         getAlgorithms().add("WithinAlgorithm");
-
+        webappHome=System.getProperty("catalina.base")+ File.separator+"webapps"+File.separator+"portal";
+        File dir=new File(CodegenUtils.webappHome+File.separator+"codegen");
+        dir.mkdirs();
     }
 
     public static List<String> getMethods() {

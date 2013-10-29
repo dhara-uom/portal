@@ -112,7 +112,7 @@ public List<String> getInputIdentifiers() {
                         <#if outputMapping.identifier = outputIdentifier>
                             if("${outputIdentifier}".equalsIgnoreCase(key)) {
                             wrappedValue=new ${outputMapping.mappingClass}(value);
-                        }
+                            }
                         </#if>
                     </#list>
                 </#list>
@@ -147,5 +147,5 @@ public List<String> getInputIdentifiers() {
                     }
                     in.close();
                     return response.toString();
-            }
-    }
+                    }
+                    }

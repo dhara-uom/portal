@@ -244,7 +244,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             //String current = new java.io.File( "." ).getCanonicalPath();
             //fg.setDirectoryForTemplateLoading(new File(
             //current));
-            File file1=new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"templates");
+            File file1=new File(CodegenUtils.webappHome+File.separator+"WEB-INF"+File.separator+"templates");
             cfg.setDirectoryForTemplateLoading(file1);
             Template template = cfg.getTemplate("wpstemplate.ftl");
 
@@ -282,8 +282,7 @@ public class CodeGenServiceImpl implements CodeGenService{
                 }
             }
 
-
-            Writer file = new FileWriter(new File(className+".java"));
+            Writer file = new FileWriter(new File(CodegenUtils.webappHome+File.separator+"codegen"+File.separator+className+".java"));
             template.process(data, file);
             file.flush();
             file.close();
@@ -291,7 +290,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             StringBuilder builder=new StringBuilder();
             String currentLine;
             BufferedReader br;
-            br = new BufferedReader(new FileReader(className+".java"));
+            br = new BufferedReader(new FileReader(CodegenUtils.webappHome+File.separator+"codegen"+File.separator+className+".java"));
             while ((currentLine = br.readLine()) != null) {
                 builder.append(currentLine);
                 builder.append(System.getProperty("line.separator"));
@@ -304,6 +303,7 @@ public class CodeGenServiceImpl implements CodeGenService{
             throw new PortalException("Template exception when generating the template");
         }
     }
+
     public AiravataClientAPIService getAiravataClientAPIService() {
         return airavataClientAPIService;
     }
