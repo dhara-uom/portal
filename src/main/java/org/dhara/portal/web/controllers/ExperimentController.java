@@ -2,6 +2,7 @@ package org.dhara.portal.web.controllers;
 
 import org.apache.airavata.registry.api.workflow.ExperimentData;
 import org.apache.airavata.registry.api.workflow.NodeExecutionData;
+import org.apache.log4j.Logger;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.helper.ExperimentHelper;
 import org.dhara.portal.web.helper.Nodehelper;
@@ -18,6 +19,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * Created with IntelliJ IDEA.
  * User: nipuni
@@ -26,6 +28,10 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class ExperimentController extends AbstractController {
+
+    static Logger log = Logger.getLogger(ExperimentController.class);
+
+
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
@@ -71,6 +77,7 @@ public class ExperimentController extends AbstractController {
         model.addObject("message", experimentHelpers);
         return model;
     }
+
 
     public ArrayList<ExperimentHelper> reverseList(List<ExperimentHelper> list){
 

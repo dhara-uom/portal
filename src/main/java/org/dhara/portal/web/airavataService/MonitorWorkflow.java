@@ -57,6 +57,7 @@ public class MonitorWorkflow {
         }
 
         List<MonitorMessage> messages = monitorListener.getEvents();
+        experimentMonitor.stopMonitoring();
         return messages;
     }
 }
