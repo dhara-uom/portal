@@ -63,7 +63,7 @@ public class WorkflowMonitorController extends AbstractController {
         AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
 
         List<MonitorMessage> events = airavataClientAPIService.monitorWorkflow(ints,workflowName);
-
+        //TODO use ajax to dynalically update events. ajax with mvc
         ModelAndView model = new ModelAndView("monitoring");
         model.addObject("events", events);
         return model;

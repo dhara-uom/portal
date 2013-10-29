@@ -163,7 +163,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
-        //workflowId is workflow name
+
         List<WorkflowInput> workflowInputs = workflow.getWorkflowInputs();
         for (WorkflowInput workflowInput : workflowInputs) {
             Object value=inputs[0];
@@ -176,7 +176,6 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
             }
         }
 
-        //airavata 0.7 stuck at this point
         String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
         List<MonitorMessage> events = MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
         airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
