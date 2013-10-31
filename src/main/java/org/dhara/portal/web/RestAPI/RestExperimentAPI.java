@@ -22,7 +22,7 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Controller
-@RequestMapping(value = "/data/experimentData.htm")
+@RequestMapping(value = "/experimentdata")
 public class RestExperimentAPI {
 
     @Autowired
