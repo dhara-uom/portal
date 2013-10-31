@@ -15,6 +15,7 @@ import org.apache.airavata.rest.client.PasswordCallbackImpl;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
 import org.dhara.portal.web.exception.PortalException;
+import org.springframework.stereotype.Component;
 
 import java.net.URI;
 import java.util.HashMap;
@@ -28,6 +29,7 @@ import java.util.Map;
  * Time: 12:01 PM
  * To change this template use File | Settings | File Templates.
  */
+@Component
 public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
     private AiravataConfig airavataConfig;
