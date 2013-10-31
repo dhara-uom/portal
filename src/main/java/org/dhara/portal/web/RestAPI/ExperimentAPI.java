@@ -23,12 +23,12 @@ public class ExperimentAPI {
     static Logger log = Logger.getLogger(ExperimentAPI.class);
 
     @Autowired
-    private AiravataClientAPIService airavataClientAPIService;
+    private AiravataClientAPIService airavataAPIService;
 
     @GET
     public Response handleRequestInternal() throws Exception {
 
-        List<ExperimentData> experimentData = airavataClientAPIService.getExperimentData();
+        List<ExperimentData> experimentData = airavataAPIService.getExperimentData();
 
         //This gives a null pointer exception since airavataClientAPIService object is a null object
         return Response.status(Response.Status.OK).entity(experimentData).build();
