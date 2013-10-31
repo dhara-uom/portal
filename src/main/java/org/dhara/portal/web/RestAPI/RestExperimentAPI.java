@@ -7,10 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Response;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.Map;
 
@@ -29,7 +30,8 @@ public class RestExperimentAPI {
     private AiravataClientAPIService airavataAPIService;
 
     @RequestMapping(method = RequestMethod.GET)
-    public Response handleRequestInternal(Model model, HttpServletRequest httpServletRequest) throws Exception {
+    @ResponseBody
+    public List<ExperimentData> handleRequestInternal(Model model, HttpServletRequest httpServletRequest, HttpServletResponse response) throws Exception {
 
         List<ExperimentData> experimentData = airavataAPIService.getExperimentData();
 
@@ -40,6 +42,6 @@ public class RestExperimentAPI {
         model.addAttribute("data", experimentData);
 
 
-        return Response.status(Response.Status.OK).entity(experimentData).build();
+        return experimentData;
     }
 }
