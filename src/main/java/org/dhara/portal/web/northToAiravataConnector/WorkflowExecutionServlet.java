@@ -34,7 +34,7 @@ public class WorkflowExecutionServlet extends javax.servlet.http.HttpServlet {
             for(WorkflowInput workflowInput:workflow.getWorkflowInputs()) {
                 inputs.put(workflowInput.getName(),request.getParameter(workflowInput.getName()));
             }
-            outputs = airavataClientAPIService.executeWorkflow(inputs, workflowId);      //     _52NorthExecuteWorkFlowTest
+            outputs = airavataClientAPIService.executeWorkflow(inputs, workflowId,workflow);      //     _52NorthExecuteWorkFlowTest
             JSONObject jsonObject = new JSONObject(outputs);
             PrintWriter printWriter = response.getWriter();
             printWriter.write(jsonObject.toJSONString());

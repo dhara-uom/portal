@@ -40,7 +40,7 @@ public interface AiravataClientAPIService {
      * @return
      * @throws Exception
      */
-    public Map<String,Object> executeWorkflow(Map<String,Object> inputs,String workflowId) throws Exception;
+    public Map<String,Object> executeWorkflow(Map<String,Object> inputs,String workflowId,Workflow workflow) throws Exception;
 
     /**
      *  Query previous data associated with experiments performed in airavata

@@ -77,9 +77,8 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     /**
      * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#executeWorkflow(java.util.Map, String) ()
      */
-    public Map<String,Object> executeWorkflow(Map<String, Object> inputs, String workflowId) throws Exception {
+    public Map<String,Object> executeWorkflow(Map<String, Object> inputs, String workflowId, Workflow workflow) throws Exception {
         AiravataAPI airavataAPI=getAiravataAPI();
-        Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
         List<WorkflowInput> workflowInputs = workflow.getWorkflowInputs();
         for (WorkflowInput workflowInput : workflowInputs) {
             Object value=inputs.get(workflowInput.getName());
