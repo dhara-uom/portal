@@ -42,7 +42,11 @@
 
     <servlet-mapping>
         <servlet-name>mvc-dispatcher</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/restServices/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>*.htm</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ExecutionServlet</servlet-name>
