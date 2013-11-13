@@ -36,6 +36,31 @@
             else
                 document.getElementById(table_id).style.display = "none";
         }
+        function showPos(event, table_id) {
+            var el, x, y;
+
+            el = document.getElementById(table_id);
+            if (window.event) {
+                x = window.event.clientX + document.documentElement.scrollLeft
+                        + document.body.scrollLeft;
+                y = window.event.clientY + document.documentElement.scrollTop +
+                        + document.body.scrollTop;
+            }
+            else {
+                x = event.clientX + window.scrollX;
+                y = event.clientY + window.scrollY;
+            }
+            x -= 2; y -= 2;
+            y = y+35 ;
+            el.style.left = x + "px";
+            el.style.top = y + "px";
+            el.style.display = "block";
+        }
+
+        function hideTable(event, table_id){
+            el = document.getElementById(table_id);
+            el.style.display = "none";
+        }
     </script>
 
 
@@ -87,28 +112,28 @@
         /*}*/
 
         .inner_table th{
-            border-width: 1px;
-            padding: 8px;
+            border-width: 0px;
+            padding: 1px;
             border-style: solid;
-            border-color: #666666;
-            background-color: #dedede;
+            /*border-color: #666666;*/
+            /*background-color: #dedede;*/
         }
 
         .inner_table td{
-            border-width: 1px;
-            padding: 8px;
+            border-width: 0px;
+            padding: 1px;
             border-style: solid;
-            border-color: #666666;
-            background-color: #ffffff;
+            /*border-color: #666666;*/
+            /*background-color: #ffffff;*/
         }
 
         .inner_table table{
             font-family: verdana,arial,sans-serif;
-            font-size:5px;
+            font-size:3px;
             color:#333333;
             border-width: 1px;
-            border-color: #666666;
-            border-collapse: collapse;
+            /*border-color: #666666;*/
+            /*border-collapse: collapse;*/
         }
 
     </style>
@@ -278,26 +303,33 @@
                                 </div>
                                 <div>
                                     <display:column>
-                                    <a href="#" onclick="showTable('${user.nodehelperList}')" >More...</a>
-                                    <table class="inner_table" id="${user.nodehelperList}" style="display:none">
-                                        <tr>
-                                            <th>Node Type</th>
-                                            <th>Workflow Instance Node Id</th>
-                                            <th>Input</th>
-                                            <th>Output</th>
-                                        </tr>
-                                        <c:forEach var="item" items="${user.nodehelperList}">
+                                    <%--<a href="#" onclick="showTable('${user.nodehelperList}')" >More...</a>--%>
+                                        <a href="#" onclick="showPos(event,'${user.nodehelperList}')" onmouseout="hideTable(event,'${user.nodehelperList}')">More...</a>
+                                        <DIV id='${user.nodehelperList}' style='display: none; position: absolute; left: 200px; top: 100px; border: solid black 1px; padding: 10px; background-color: rgb(200,100,100); text-align: justify; font-size: 12px;'>
+                                            <SPAN id='${user.nodehelperList}+22'>
 
-                                            <tr>
-                                                <td>  ${item.type} </td>
-                                                <td> ${item.workflowInstanceNodeId} </td>
-                                                <td> ${item.input} </td>
-                                                <td> ${item.output} </td>
+                                                    <%--<table class="inner_table" id="${user.nodehelperList}" style="display:none">--%>
+                                                <table class="inner_table" id="${user.nodehelperList}">
+                                                        <tr>
+                                                            <th>Node Type</th>
+                                                            <th>Workflow Instance Node Id</th>
+                                                            <th>Input</th>
+                                                            <th>Output</th>
+                                                        </tr>
+                                                        <c:forEach var="item" items="${user.nodehelperList}">
 
-                                            </tr>
+                                                            <tr>
+                                                                <td>  ${item.type} </td>
+                                                                <td> ${item.workflowInstanceNodeId} </td>
+                                                                <td> ${item.input} </td>
+                                                                <td> ${item.output} </td>
 
-                                        </c:forEach>
-                                    </table>
+                                                            </tr>
+
+                                                        </c:forEach>
+                                                    </table>
+                                                </SPAN>
+                                        </DIV>
                                     </display:column>
                                  <%--<c:forEach var="item" items="${user.nodehelperList}">--%>
                                 <%--<display:column title="${item.workflowInstanceNodeId}">${item.workflowInstanceNodeId}</display:column>--%>
