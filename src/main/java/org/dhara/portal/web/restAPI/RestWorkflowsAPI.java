@@ -1,4 +1,4 @@
-package org.dhara.portal.web.RestAPI;
+package org.dhara.portal.web.restAPI;
 
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.apache.airavata.workflow.model.wf.WorkflowInput;
