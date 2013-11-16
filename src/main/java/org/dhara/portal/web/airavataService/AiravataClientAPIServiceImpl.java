@@ -75,7 +75,6 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     }
 
     /**
-     * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#executeWorkflow(java.util.Map, String) ()
      */
     public Map<String,Object> executeWorkflow(Map<String, Object> inputs, String workflowId, Workflow workflow) throws Exception {
         AiravataAPI airavataAPI=getAiravataAPI();
@@ -166,8 +165,9 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
 
         List<WorkflowInput> workflowInputs = workflow.getWorkflowInputs();
-        for (WorkflowInput workflowInput : workflowInputs) {
-            Object value=inputs[0];
+        for (int count =0; count<inputs.length;count++) {
+            Object value=inputs[count];
+            WorkflowInput workflowInput = workflowInputs.get(count);
             if ("int".equals(workflowInput.getType())||"integer".equals(workflowInput.getType())) {
                 workflowInput.setValue((Integer)value);
             } else if("String".equals(workflowInput.getType())){
@@ -179,7 +179,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
 
         String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
         List<MonitorMessage> events = MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
-        airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
+
 
         return events;
 

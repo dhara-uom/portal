@@ -35,23 +35,42 @@ public class MonitorListener implements EventDataListener {
 
     private static final Logger log = LoggerFactory.getLogger(MonitorListener.class);
 
-    private List<MonitorMessage> events = new ArrayList<MonitorMessage>();;
+    private List<MonitorMessage> events = new ArrayList<MonitorMessage>();
 
     public void notify(EventDataRepository eventDataRepo, EventData eventData) {
         log.info("ExperimentID: " + eventData.getExperimentID());
         log.info("Message: " + eventData.getMessage());
-
+//        try {
+//            writeToFile("Message: " + eventData.getMessage());
+//        } catch (IOException e) {
+//            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+//        }
         MonitorMessage monitorMessage = new MonitorMessage();
         monitorMessage.setMesssage(eventData.getMessage());
         monitorMessage.setStatusText(eventData.getStatusText());
         monitorMessage.setTimestamp(eventData.getTimestamp());
-//        monitorMessage.setWorkflowName(eventData.getWorkflowID().toString());
         events.add(monitorMessage);
     }
 
     public List<MonitorMessage> getEvents(){
         return this.events;
     }
+
+//    public void writeToFile(String message) throws IOException {
+//        String filename= "/home/nipuni/Desktop/Portal/newAddedRepo/portal/src/main/resources/logs";
+//        FileWriter fw = new FileWriter(filename,true);
+//        try
+//        {
+//            fw.write("\n"+message+"\n");//appends the string to the file
+//        }
+//        catch(IOException ioe)
+//        {
+//            System.err.println("IOException: " + ioe.getMessage());
+//        }
+//        finally {
+//            fw.close();
+//        }
+//    }
 
     public void setExperimentMonitor(Monitor monitor) {
         // TODO Auto-generated method stub
@@ -93,5 +112,6 @@ public class MonitorListener implements EventDataListener {
         // TODO Auto-generated method stub
 
     }
+
 
 }
