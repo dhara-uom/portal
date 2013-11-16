@@ -40,8 +40,21 @@
 
     <script>
         $(document).ready(function(){
-            document.getElementById("workflowId").innerHTML = document.getElementById("hiddenInput").innerHTML;
+            setTimeout(get_events, 4000);
         });
+
+
+        function get_events(){
+            $.ajax({
+                url: 'restServices/monitorData',
+                success: function(data) {
+                    $('#test').html(data);
+                }
+            });
+            setTimeout(get_events, 5000);
+
+        }
+
     </script>
     <style type="text/css">
 
@@ -229,11 +242,7 @@
             <div class="span10">
 
                 <div class="slate clearfix">
-                    <c:forEach var="event" items="${events}" varStatus="outer">
-                        <input id="hiddenInput" type="hidden" value="${event.workflowName}">
-                       <p style="white-space:pre " ><font color="black">  ${event.timestamp}               ${event.statusText}              ${event.messsage} <br/> </font></p>
-
-                    </c:forEach>
+                    <div id="test"></div>
 
                 </div>
 

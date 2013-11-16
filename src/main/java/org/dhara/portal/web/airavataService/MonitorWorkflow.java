@@ -29,10 +29,14 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MonitorWorkflow {
+public class MonitorWorkflow extends Observable implements Observer{
     private static final Logger log = LoggerFactory.getLogger(MonitorWorkflow.class);
+    private List<MonitorMessage> messages = new ArrayList<MonitorMessage>();
 
     //TODO this method is already using in another class (correct it)  - WorkflowExecutionServlet.java
     public void monitor(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
@@ -43,33 +47,28 @@ public class MonitorWorkflow {
         experimentMonitor.startMonitoring();
     }
 
-    public static List<MonitorMessage> monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException, IOException {
-        MonitorListener monitorListener = new MonitorListener();
+    public static void monitorWorkflow(final String experimentId,AiravataAPI airavataAPI,
+                                                       MonitorListener monitorListener) throws AiravataAPIInvocationException, URISyntaxException, IOException {
         Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
                 monitorListener);
-        log.info("Started the Workflow monitor");
 
-//        writeToFile("Started the Workflow monitor");
         experimentMonitor.startMonitoring();
         airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
-        List<MonitorMessage> messages = monitorListener.getEvents();
         experimentMonitor.stopMonitoring();
+
+    }
+
+
+
+    public void update(Observable o, Object arg) {
+        getMessages().add((MonitorMessage) arg);
+        setChanged();
+        notifyObservers(arg);
+    }
+
+    public List<MonitorMessage> getMessages() {
         return messages;
     }
 
-//    public static void writeToFile(String message) throws IOException {
-//        String filename= "/home/nipuni/Desktop/Portal/newAddedRepo/portal/src/main/resources/logs";
-//        FileWriter fw = new FileWriter(filename,true); //the true will append the new data
-//        try
-//        {
-//            fw.write("\n"+message+"\n");//appends the string to the file
-//        }
-//        catch(IOException ioe)
-//        {
-//            System.err.println("IOException: " + ioe.getMessage());
-//        }
-//        finally {
-//            fw.close();
-//        }
-//    }
+
 }

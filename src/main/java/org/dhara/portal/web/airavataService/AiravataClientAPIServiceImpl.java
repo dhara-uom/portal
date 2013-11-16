@@ -18,9 +18,7 @@ import org.dhara.portal.web.exception.PortalException;
 import org.springframework.stereotype.Component;
 
 import java.net.URI;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -30,10 +28,13 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 @Component
-public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
+public class AiravataClientAPIServiceImpl extends Observable implements AiravataClientAPIService, Observer{
 
     private AiravataConfig airavataConfig;
 
+    private List<MonitorMessage> events = new ArrayList<MonitorMessage>();
+
+    private AiravataAPI API;
     /**
      * @see org.dhara.portal.web.airavataService.AiravataClientAPIService#getAllWorkflows()
      */
@@ -110,23 +111,24 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
     }
 
     private AiravataAPI getAiravataAPI() throws PortalException {
-            AiravataAPI airavataAPI;
-            int port = airavataConfig.getPort();
-            String serverUrl = airavataConfig.getServerUrl();
-            String serverContextName = airavataConfig.getServerContextName();
-            String username = airavataConfig.getUserName();
-            String password = airavataConfig.getPassword();
-            String gatewayName = airavataConfig.getGatewayName();
-            String registryURL = "http://" + serverUrl + ":" + port + "/" + serverContextName + "/api";
-            AiravataAPI api= null;
-            try{
-                PasswordCallback passwordCallback = new PasswordCallbackImpl(username, password);
-                api = AiravataAPIFactory.getAPI(new URI(registryURL), gatewayName, username, passwordCallback);
-                airavataAPI = api;
-            } catch (Exception e) {
-                throw new PortalException("Error creating airavata api instance",e);
-            }
-            return airavataAPI;
+        if(API == null)  {
+                int port = airavataConfig.getPort();
+                String serverUrl = airavataConfig.getServerUrl();
+                String serverContextName = airavataConfig.getServerContextName();
+                String username = airavataConfig.getUserName();
+                String password = airavataConfig.getPassword();
+                String gatewayName = airavataConfig.getGatewayName();
+                String registryURL = "http://" + serverUrl + ":" + port + "/" + serverContextName + "/api";
+                AiravataAPI api= null;
+                try{
+                    PasswordCallback passwordCallback = new PasswordCallbackImpl(username, password);
+                    api = AiravataAPIFactory.getAPI(new URI(registryURL), gatewayName, username, passwordCallback);
+                    API = api;
+                } catch (Exception e) {
+                    throw new PortalException("Error creating airavata api instance",e);
+                }
+        }
+            return API;
     }
 
     public void setAiravataConfig(AiravataConfig airavataConfig) {
@@ -159,7 +161,7 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         return nodeData;
     }
 
-    public List<MonitorMessage> monitorWorkflow(int[] inputs, String workflowId) throws Exception {
+    public void monitorWorkflow(int[] inputs, String workflowId) throws Exception {
 
         AiravataAPI airavataAPI=getAiravataAPI();
         Workflow workflow = airavataAPI.getWorkflowManager().getWorkflow(workflowId);
@@ -178,10 +180,25 @@ public class AiravataClientAPIServiceImpl implements AiravataClientAPIService{
         }
 
         String experimentId=airavataAPI.getExecutionManager().runExperiment(workflowId, workflowInputs);
-        List<MonitorMessage> events = MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI);
 
-
-        return events;
+        MonitorWorkflow monitorWorkflow = new MonitorWorkflow();
+        MonitorListener monitorListener = new MonitorListener();
+        monitorListener.addObserver(monitorWorkflow);
+        monitorWorkflow.addObserver(this);
+        MonitorWorkflow.monitorWorkflow(experimentId,airavataAPI,monitorListener);
 
     }
+
+    public void update(Observable o, Object arg) {
+        getEvents().add((MonitorMessage) arg);
+        setChanged();
+        notifyObservers(arg);
+    }
+
+
+    public List<MonitorMessage> getEvents() {
+        return events;
+    }
+
+
 }
