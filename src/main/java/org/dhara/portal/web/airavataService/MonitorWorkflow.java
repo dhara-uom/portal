@@ -23,12 +23,11 @@ package org.dhara.portal.web.airavataService;
 
 import org.apache.airavata.client.api.AiravataAPI;
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
-import org.apache.airavata.ws.monitor.EventData;
-import org.apache.airavata.ws.monitor.EventDataRepository;
 import org.apache.airavata.ws.monitor.Monitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -44,20 +43,33 @@ public class MonitorWorkflow {
         experimentMonitor.startMonitoring();
     }
 
-    public static List<MonitorMessage> monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException {
+    public static List<MonitorMessage> monitorWorkflow(final String experimentId,AiravataAPI airavataAPI) throws AiravataAPIInvocationException, URISyntaxException, IOException {
         MonitorListener monitorListener = new MonitorListener();
         Monitor experimentMonitor = airavataAPI.getExecutionManager().getExperimentMonitor(experimentId,
                 monitorListener);
         log.info("Started the Workflow monitor");
-        experimentMonitor.startMonitoring();
-        EventDataRepository dataRepository = experimentMonitor.getEventDataRepository();
-        List<EventData> eventDataList = dataRepository.getEvents();
-        for(EventData ed : eventDataList){
-            monitorListener.notify(dataRepository,ed);
-        }
 
+//        writeToFile("Started the Workflow monitor");
+        experimentMonitor.startMonitoring();
+        airavataAPI.getExecutionManager().waitForExperimentTermination(experimentId);
         List<MonitorMessage> messages = monitorListener.getEvents();
         experimentMonitor.stopMonitoring();
         return messages;
     }
+
+//    public static void writeToFile(String message) throws IOException {
+//        String filename= "/home/nipuni/Desktop/Portal/newAddedRepo/portal/src/main/resources/logs";
+//        FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+//        try
+//        {
+//            fw.write("\n"+message+"\n");//appends the string to the file
+//        }
+//        catch(IOException ioe)
+//        {
+//            System.err.println("IOException: " + ioe.getMessage());
+//        }
+//        finally {
+//            fw.close();
+//        }
+//    }
 }
