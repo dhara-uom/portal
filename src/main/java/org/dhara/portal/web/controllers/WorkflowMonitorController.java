@@ -6,6 +6,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.airavataService.MonitorMessage;
 import org.dhara.portal.web.helper.InputHelper;
+import org.dhara.portal.web.restAPI.RestWorkflowMonitorAPI;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -13,9 +14,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -27,6 +26,7 @@ import java.util.List;
 public class WorkflowMonitorController extends AbstractController {
 
     protected final Log log = LogFactory.getLog(getClass());
+    private List<MonitorMessage> events = new ArrayList<MonitorMessage>();
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -62,10 +62,13 @@ public class WorkflowMonitorController extends AbstractController {
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
 
-        List<MonitorMessage> events = airavataClientAPIService.monitorWorkflow(ints,workflowName);
-        //TODO use ajax to dynalically update events. ajax with mvc
+        RestWorkflowMonitorAPI restWorkflowMonitorAPI = new RestWorkflowMonitorAPI();
+        restWorkflowMonitorAPI.getEvents(airavataClientAPIService, ints, workflowName);
+
         ModelAndView model = new ModelAndView("monitoring");
         model.addObject("events", events);
         return model;
     }
+
+
 }

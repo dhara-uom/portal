@@ -7,8 +7,6 @@ import org.apache.airavata.registry.api.workflow.NodeExecutionData;
 import org.apache.airavata.workflow.model.wf.Workflow;
 import org.dhara.portal.web.exception.PortalException;
 
-
-
 import java.util.List;
 import java.util.Map;
 
