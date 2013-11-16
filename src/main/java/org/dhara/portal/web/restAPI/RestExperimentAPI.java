@@ -1,4 +1,4 @@
-package org.dhara.portal.web.RestAPI;
+package org.dhara.portal.web.restAPI;
 
 import org.apache.airavata.client.api.AiravataAPIInvocationException;
 import org.apache.airavata.registry.api.exception.worker.ExperimentLazyLoadedException;

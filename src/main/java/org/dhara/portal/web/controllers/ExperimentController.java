@@ -31,8 +31,6 @@ public class ExperimentController extends AbstractController {
 
     static Logger log = Logger.getLogger(ExperimentController.class);
 
-
-
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse) throws Exception {
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());

@@ -13,15 +13,13 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc">
 
 
-    <context:component-scan base-package="org.dhara.portal.web.RestAPI" />
+    <context:component-scan base-package="org.dhara.portal.web.restAPI" />
     <mvc:annotation-driven/>
 
     <!-- the application context definition for the springapp DispatcherServlet -->
     <!--<bean name="/workflows.htm" class="org.dhara.portal.web.controllers.WorkflowDeploymentController"/>-->
     <bean name="/experimentList.htm" class="org.dhara.portal.web.controllers.ExperimentController"/>
     <bean name="/workflowList.htm" class="org.dhara.portal.web.controllers.WorkflowController"/>
-    <bean name="/deployWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowDeploymentController"/>
-    <bean name="/customDeploy.htm" class="org.dhara.portal.web.controllers.WorkflowCustomDeploymentController"/>
     <bean name="/monitorWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowMonitorController"></bean>
 
 

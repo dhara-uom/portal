@@ -9,56 +9,8 @@
                     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
                     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <bean id="dataSourceBean" class="org.apache.commons.dbcp.BasicDataSource" >
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/dhara"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
-    </bean>
-
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-        <property name="dataSource" ref="dataSourceBean"/>
-        <property name="mappingResources">
-            <list>
-                <value>customer.hbm.xml</value>
-            </list>
-        </property>
-
-        <property name="hibernateProperties">
-            <value>hibernate.dialect=org.hibernate.dialect.MySQLDialect
-                hibernate.hbm2ddl.auto=update
-                hibernate.show_sql=true
-            </value>
-        </property>
-    </bean>
-
-    <tx:annotation-driven />
-    <bean id = "transactionManager" class = "org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name = "sessionFactory" ref = "sessionFactory" />
-    </bean>
-
-    <bean id="userDao" class="org.dhara.portal.web.helperService.dao.HibernateUserDao">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
-    </bean>
-
-    <bean id="userService" class="org.dhara.portal.web.helperService.service.UserServiceImpl">
-        <property name="userDao">
-            <ref bean="userDao"/>
-        </property>
-    </bean>
-
-    <bean id="portalDao" class="org.dhara.portal.web.dataAccessLayer.PortalDAOImpl">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
-    </bean>
 
     <bean id="airavataConfig" class="org.dhara.portal.web.airavataService.AiravataConfig" scope="singleton">
-    </bean>
-
-    <bean id="wps52NorthConfig" class="org.dhara.portal.web.wps52NorthService.WPS52NorthConfig" scope="singleton">
     </bean>
 
     <bean id="airavataAPIService" class="org.dhara.portal.web.airavataService.AiravataClientAPIServiceImpl">
@@ -67,15 +19,4 @@
         </property>
     </bean>
 
-    <bean id="codeGenService" class="org.dhara.portal.web.codegenService.CodeGenServiceImpl" scope="prototype">
-        <property name="airavataClientAPIService">
-            <ref bean="airavataAPIService"/>
-        </property>
-    </bean>
-
-    <bean id="wps52NorthService" class="org.dhara.portal.web.wps52NorthService.WPSConnect52ServiceImpl" scope="prototype">
-        <property name="wps52NorthConfig">
-            <ref bean="wps52NorthConfig"/>
-        </property>
-    </bean>
 </beans>
