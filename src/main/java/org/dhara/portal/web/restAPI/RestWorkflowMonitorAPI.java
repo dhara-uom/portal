@@ -46,7 +46,7 @@ public class RestWorkflowMonitorAPI implements Observer {
         }
 
         html=html+ "</table>";
-
+         events = new ArrayList<MonitorMessage>();
         return html;
     }
 
