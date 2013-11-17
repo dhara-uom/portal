@@ -48,7 +48,7 @@
             $.ajax({
                 url: 'restServices/monitorData',
                 success: function(data) {
-                    $('#test').html(data);
+                    $('#test').append(data);
                 }
             });
             setTimeout(get_events, 5000);

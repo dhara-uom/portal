@@ -52,7 +52,9 @@
 
              var query = $('#'+form_name).serialize();
              var link = "monitorWorkflow.htm?workflowId="+form_name+"&"+query;
-             return link;
+             window.open(link);
+
+             return '';
 
         }
 
