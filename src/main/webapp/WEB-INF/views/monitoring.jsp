@@ -39,14 +39,17 @@
     <![endif]-->
 
     <script>
+
+        var workflowName;
         $(document).ready(function(){
-            setTimeout(get_events, 4000);
+            workflowName = document.URL.split("?")[1].split("&")[0];
+            setTimeout(get_events, 2000);
         });
 
 
         function get_events(){
             $.ajax({
-                url: 'restServices/monitorData',
+                url: 'restServices/monitorData/'+workflowName,
                 success: function(data) {
                     $('#test').append(data);
                 }

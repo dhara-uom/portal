@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -32,14 +33,17 @@ public class RestWorkflowMonitorAPI implements Observer {
     @Autowired
     private AiravataClientAPIService airavataClientAPIService;
 
+    private static String workflowId;
+
     @Autowired
     private RestServiceImpl restService;
 
-    @RequestMapping(value = "/monitorData", method = RequestMethod.GET)
+    @RequestMapping(value = {"/monitorData/{workflowId}", "/monitorData/{workflowId}/"}, method = RequestMethod.GET)
     @ResponseBody
-    public String handleRequestInternal(Model model, HttpServletRequest httpServletRequest) throws Exception {
+    public String handleRequestInternal(@PathParam("name") String name, Model model, HttpServletRequest httpServletRequest) throws Exception {
 
-        String html ="<table border=\"3\">" ;
+        workflowId = name;
+        String html ="" ;
 
         for(MonitorMessage message: events){
             String timestamp = message.getTimestamp().toString();
@@ -52,7 +56,7 @@ public class RestWorkflowMonitorAPI implements Observer {
                     "</tr>";
         }
 
-        html=html+ "</table>";
+
          events = new ArrayList<MonitorMessage>();
         return html;
     }
@@ -60,7 +64,8 @@ public class RestWorkflowMonitorAPI implements Observer {
     public void getEvents(AiravataClientAPIService airavataClientAPIService,int[] ints, String workflowName) throws Exception {
          events = new ArrayList<MonitorMessage>();
         ((AiravataClientAPIServiceImpl)airavataClientAPIService).addObserver(this);
-         airavataClientAPIService.monitorWorkflow(ints,workflowName);
+        workflowId = workflowName;
+        airavataClientAPIService.monitorWorkflow(ints,workflowName);
     }
 
 

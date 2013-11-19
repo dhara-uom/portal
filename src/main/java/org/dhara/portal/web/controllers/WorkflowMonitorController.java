@@ -4,9 +4,10 @@ import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
+import org.dhara.portal.web.airavataService.AiravataConfig;
 import org.dhara.portal.web.airavataService.MonitorMessage;
 import org.dhara.portal.web.helper.InputHelper;
-import org.dhara.portal.web.restAPI.RestWorkflowMonitorAPI;
+import org.dhara.portal.web.helper.MonitorThread;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,7 +15,9 @@ import org.springframework.web.servlet.mvc.AbstractController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -62,8 +65,8 @@ public class WorkflowMonitorController extends AbstractController {
         ApplicationContext context= WebApplicationContextUtils.getRequiredWebApplicationContext(getServletContext());
         AiravataClientAPIService airavataClientAPIService= (AiravataClientAPIService) context.getBean("airavataAPIService");
 
-        RestWorkflowMonitorAPI restWorkflowMonitorAPI = new RestWorkflowMonitorAPI();
-        restWorkflowMonitorAPI.getEvents(airavataClientAPIService, ints, workflowName);
+        Runnable monitorThread = new MonitorThread(workflowName,airavataClientAPIService,ints);
+        AiravataConfig.executor.execute(monitorThread);
 
         ModelAndView model = new ModelAndView("monitoring");
         model.addObject("events", events);

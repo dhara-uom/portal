@@ -11,6 +11,8 @@ import javax.xml.stream.XMLStreamReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created with IntelliJ IDEA.
@@ -32,7 +34,11 @@ public class AiravataConfig {
     private  String broker;
     private  String gfac;
 
+    public static ExecutorService executor;
+
     public AiravataConfig() throws PortalException {
+
+        executor = Executors.newFixedThreadPool(10);
         if(isAiravataConfigurationExists()) {
             setAiravataConfiguration();
         } else {
@@ -53,7 +59,7 @@ public class AiravataConfig {
         this.setPassword("admin");
         this.setUserName("admin");
         this.setGatewayName("default");
-        this.setPort(8081);
+        this.setPort(8001);
         this.setServerContextName("airavata-registry");
         this.setServerUrl("localhost");
     }
