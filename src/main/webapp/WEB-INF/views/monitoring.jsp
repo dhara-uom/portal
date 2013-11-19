@@ -51,7 +51,7 @@
                     $('#test').append(data);
                 }
             });
-            setTimeout(get_events, 5000);
+            setTimeout(get_events, 1000);
 
         }
 

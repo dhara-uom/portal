@@ -3,6 +3,8 @@ package org.dhara.portal.web.restAPI;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.airavataService.AiravataClientAPIServiceImpl;
 import org.dhara.portal.web.airavataService.MonitorMessage;
+import org.dhara.portal.web.restClientService.RestServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,11 @@ public class RestWorkflowMonitorAPI implements Observer {
 
     private static List<MonitorMessage> events = new ArrayList<MonitorMessage>();
 
+    @Autowired
+    private AiravataClientAPIService airavataClientAPIService;
+
+    @Autowired
+    private RestServiceImpl restService;
 
     @RequestMapping(value = "/monitorData", method = RequestMethod.GET)
     @ResponseBody
@@ -58,6 +65,8 @@ public class RestWorkflowMonitorAPI implements Observer {
 
 
     public void update(Observable o, Object arg) {
+
         events.add((MonitorMessage)arg);
+
     }
 }
