@@ -23,6 +23,23 @@
     <bean name="/monitorWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowMonitorController"></bean>
 
 
+    <bean id="portalConfiguration" class="org.dhara.portal.web.restClientService.PortalConfiguration" scope="singleton">
+    </bean>
+
+    <bean id="restAPISerservice" class="org.dhara.portal.web.restClientService.RestServiceImpl" scope="prototype">
+        <property name="portalConfiguration">
+            <ref bean="portalConfiguration"/>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
         <property name="prefix">
@@ -34,4 +51,5 @@
         <property name="viewClass"
                   value="org.springframework.web.servlet.view.JstlView" />
     </bean>
+
 </beans>
