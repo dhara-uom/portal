@@ -39,7 +39,7 @@
     <![endif]-->
 
     <script>
-
+        var Monitordata = " " ;
         var workflowName;
         $(document).ready(function(){
             workflowName = document.URL.split("?")[1].split("&")[0];
@@ -51,10 +51,14 @@
             $.ajax({
                 url: 'restServices/monitorData/'+workflowName,
                 success: function(data) {
+                    Monitordata = "\""+data+"\"";
                     $('#test').append(data);
                 }
             });
-            setTimeout(get_events, 1000);
+            if(Monitordata.contains("workflowTerminated")){}
+            else{
+                setTimeout(get_events, 1000);
+            }
 
         }
 

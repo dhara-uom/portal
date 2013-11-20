@@ -40,7 +40,7 @@ public class RestWorkflowMonitorAPI implements Observer {
 
     @RequestMapping(value = {"/monitorData/{workflowId}", "/monitorData/{workflowId}/"}, method = RequestMethod.GET)
     @ResponseBody
-    public String handleRequestInternal(@PathParam("name") String name, Model model, HttpServletRequest httpServletRequest) throws Exception {
+    public String handleRequestInternal(@PathParam("workflowId") String name, Model model, HttpServletRequest httpServletRequest) throws Exception {
 
         workflowId = name;
         String html ="" ;
