@@ -56,7 +56,7 @@ public class RestWorkflowsAPI {
                 inputs.add(inputHelper);
             }
             helper.setInputs(inputs);
-            //TODO get author and created data (need to implement methods)
+            helper.setDescription(workflow.getDescription());
             workflowHelpers.add(helper);
         }
         workflowHelpers = reverseList(workflowHelpers);
