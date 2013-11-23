@@ -47,7 +47,7 @@ public class AiravataConfig {
     }
 
     private boolean isAiravataConfigurationExists() {
-        File file=new File("airavata_config.xml");
+        File file=new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata_config.xml");
         return file.exists();
     }
 
@@ -69,7 +69,7 @@ public class AiravataConfig {
      * @throws PortalException
      */
     private void setAiravataConfiguration() throws PortalException {
-        File file= new File("airavata_config.xml");
+        File file= new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata_config.xml");
         FileInputStream fis;
         XMLInputFactory xif;
         XMLStreamReader reader;
@@ -87,8 +87,8 @@ public class AiravataConfig {
         OMElement documentElement= builder.getDocumentElement();
         OMElement airavataConfiguration=documentElement.getFirstElement();
         OMElement server=airavataConfiguration.getFirstElement();
-        this.setPassword(server.getFirstChildWithName(new QName("username")).getText().toString());
-        this.setUserName(server.getFirstChildWithName(new QName("password")).getText().toString());
+        this.setPassword(server.getFirstChildWithName(new QName("password")).getText().toString());
+        this.setUserName(server.getFirstChildWithName(new QName("username")).getText().toString());
         this.setGatewayName(server.getFirstChildWithName(new QName("gateway-name")).getText().toString());
         this.setPort(Integer.parseInt(server.getFirstChildWithName(new QName("port")).getText().toString()));
         this.setServerContextName(server.getFirstChildWithName(new QName("server-context")).getText().toString());
