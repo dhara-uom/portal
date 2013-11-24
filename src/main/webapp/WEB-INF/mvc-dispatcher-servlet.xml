@@ -22,16 +22,6 @@
     <bean name="/workflowList.htm" class="org.dhara.portal.web.controllers.WorkflowController"/>
     <bean name="/monitorWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowMonitorController"></bean>
 
-
-    <bean id="portalConfiguration" class="org.dhara.portal.web.restClientService.PortalConfiguration" scope="singleton">
-    </bean>
-
-    <bean id="restAPISerservice" class="org.dhara.portal.web.restClientService.RestServiceImpl" scope="prototype">
-        <property name="portalConfiguration">
-            <ref bean="portalConfiguration"/>
-        </property>
-    </bean>
-
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">
             <list>
