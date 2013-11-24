@@ -85,8 +85,7 @@ public class AiravataConfig {
             throw new PortalException(e.getMessage(),e);
         }
         OMElement documentElement= builder.getDocumentElement();
-        OMElement airavataConfiguration=documentElement.getFirstElement();
-        OMElement server=airavataConfiguration.getFirstElement();
+        OMElement server=documentElement.getFirstElement();
         this.setPassword(server.getFirstChildWithName(new QName("password")).getText().toString());
         this.setUserName(server.getFirstChildWithName(new QName("username")).getText().toString());
         this.setGatewayName(server.getFirstChildWithName(new QName("gateway-name")).getText().toString());
