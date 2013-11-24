@@ -47,7 +47,7 @@ public class AiravataConfig {
     }
 
     private boolean isAiravataConfigurationExists() {
-        File file=new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata_config.xml");
+        File file=new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata-config.xml");
         return file.exists();
     }
 
@@ -69,7 +69,7 @@ public class AiravataConfig {
      * @throws PortalException
      */
     private void setAiravataConfiguration() throws PortalException {
-        File file= new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata_config.xml");
+        File file= new File(System.getProperty("catalina.base")+File.separator+"webapps"+File.separator+"portal"+File.separator+"WEB-INF"+File.separator+"airavata-config.xml");
         FileInputStream fis;
         XMLInputFactory xif;
         XMLStreamReader reader;

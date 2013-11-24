@@ -4,7 +4,7 @@
         <username>admin</username>
         <password>admin</password>
         <message-box></message-box>
-        <gateway-name></gateway-name>
+        <gateway-name>default</gateway-name>
         <port>8080</port>
         <server-context>airavata-registry</server-context>
         <server-url>localhost</server-url>

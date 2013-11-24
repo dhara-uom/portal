@@ -3,7 +3,6 @@ package org.dhara.portal.web.restAPI;
 import org.dhara.portal.web.airavataService.AiravataClientAPIService;
 import org.dhara.portal.web.airavataService.AiravataClientAPIServiceImpl;
 import org.dhara.portal.web.airavataService.MonitorMessage;
-import org.dhara.portal.web.restClientService.RestServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,8 +34,7 @@ public class RestWorkflowMonitorAPI implements Observer {
 
     private static String workflowId;
 
-    @Autowired
-    private RestServiceImpl restService;
+
 
     @RequestMapping(value = {"/monitorData/{workflowId}", "/monitorData/{workflowId}/"}, method = RequestMethod.GET)
     @ResponseBody
