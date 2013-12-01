@@ -18,9 +18,9 @@
 
     <!-- the application context definition for the springapp DispatcherServlet -->
     <!--<bean name="/workflows.htm" class="org.dhara.portal.web.controllers.WorkflowDeploymentController"/>-->
-    <bean name="/experimentList.htm" class="org.dhara.portal.web.controllers.ExperimentController"/>
+    <!--<bean name="/experimentList.htm" class="org.dhara.portal.web.controllers.ExperimentController"/>
     <bean name="/workflowList.htm" class="org.dhara.portal.web.controllers.WorkflowController"/>
-    <bean name="/monitorWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowMonitorController"></bean>
+    <bean name="/monitorWorkflow.htm" class="org.dhara.portal.web.controllers.WorkflowMonitorController"></bean>-->
 
     <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
         <property name="messageConverters">

@@ -18,11 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA.
- * User: nipuni
- * Date: 11/3/13
- * Time: 11:59 AM
- * To change this template use File | Settings | File Templates.
+ * REST service for get workflows
  */
 @Controller
 public class RestWorkflowsAPI {
@@ -30,6 +26,13 @@ public class RestWorkflowsAPI {
     @Autowired
     private AiravataClientAPIService airavataAPIService;
 
+    /**
+     * The REST service
+     * @param model
+     * @param httpServletRequest
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/workflowData", method = RequestMethod.GET)
     @ResponseBody
     public List<WorkflowHelper> handleRequestInternal(Model model, HttpServletRequest httpServletRequest) throws Exception {
@@ -41,6 +44,12 @@ public class RestWorkflowsAPI {
         return workflowHelperList;
     }
 
+    /**
+     * Build workflow helpers from workflow data
+     * @param workflowList
+     * @return
+     * @throws Exception
+     */
     public  List<WorkflowHelper> buildHelperList(List<Workflow> workflowList) throws Exception {
 
         List<WorkflowHelper> workflowHelpers=new ArrayList<WorkflowHelper>();
@@ -64,6 +73,7 @@ public class RestWorkflowsAPI {
         return workflowHelpers;
     }
 
+    //Reverse the list
     public ArrayList<WorkflowHelper> reverseList(List<WorkflowHelper> list){
 
         if(list==null || list.isEmpty())
